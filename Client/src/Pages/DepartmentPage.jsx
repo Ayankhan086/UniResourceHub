@@ -35,7 +35,6 @@ const DepartmentsPage = () => {
       const response = axiosInstance.post('/departments/create', newDepartmentData);
       if (response.status === 200) {
         setDepartments(prev => [...prev, response.data.data]); // Update departments state
-        return;
       }
     } catch (error) {
       console.error('Error creating department:', error);
