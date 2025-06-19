@@ -8,6 +8,7 @@ import resourceRoutes from "./routes/Resource.routes.js"
 import activityRoutes from "./routes/Activity.routes.js"
 import cookieParser from "cookie-parser";
 import cors from "cors"
+import path from "path"
 
 const app = express()
 
@@ -21,6 +22,14 @@ app.use(cors(
        allowedHeaders: ['Content-Type', 'Authorization']
     }
 ))
+
+// Serve frontend in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../../Client/dist')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../Client/dist', 'index.html'));
+  });
+}
 
 app.get("/",(req, res)=>{
     res.send("Okay")
