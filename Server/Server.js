@@ -17,7 +17,8 @@ app.use(cookieParser());
 app.use(cors(
     {
        origin: (origin, callback) => callback(null, true), // Change to your frontend URL
-       credentials: true
+       credentials: true,
+       allowedHeaders: ['Content-Type', 'Authorization']
     }
 ))
 
