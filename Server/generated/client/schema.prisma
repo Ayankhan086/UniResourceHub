@@ -1,0 +1,99 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum PublishStatus {
+  PUBLISHED
+  WAITING_FOR_APPROVAL
+  REJECTED
+}
+
+enum ActivityType {
+  DOWNLOAD
+  UPLOAD
+  SAVE
+}
+
+model User {
+  id             Int            @id @default(autoincrement())
+  username       String
+  email          String         @unique
+  password       String
+  userActivities userActivity[]
+  createdAt      DateTime       @default(now())
+  Resource       Resource[]
+}
+
+model Department {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  semesters Semester[]
+  resources Resource[]
+  courses   Course[]
+  tags      String[]   @default([])
+  createdAt DateTime   @default(now())
+}
+
+model Semester {
+  id           Int        @id @default(autoincrement())
+  Number       Int
+  departmentId Int
+  department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+  courses      Course[]
+  createdAt    DateTime   @default(now())
+}
+
+model Course {
+  id           Int        @id @default(autoincrement())
+  name         String
+  semesterId   Int
+  departmentId Int
+  department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+  semester     Semester   @relation(fields: [semesterId], references: [id], onDelete: Cascade)
+  createdAt    DateTime   @default(now())
+}
+
+model Resource {
+  id             Int            @id @default(autoincrement())
+  name           String
+  File           String?
+  image          String?
+  publishStatus  PublishStatus  @default(WAITING_FOR_APPROVAL)
+  userActivities userActivity[]
+  departmentId   Int
+  department     Department     @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+  userId         Int
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt      DateTime       @default(now())
+  tags           String[]       @default([])
+}
+
+model BlackListedToken {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  createdAt DateTime @default(now())
+}
+
+model userActivity {
+  // This model tracks user activities related to resources
+  // such as downloads, uploads, and saves.
+  id         Int          @id @default(autoincrement())
+  type       ActivityType // Type of activity (DOWNLOAD, UPLOAD)
+  userId     Int
+  resourceId Int
+  user       User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  resource   Resource     @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  createdAt  DateTime     @default(now())
+}
