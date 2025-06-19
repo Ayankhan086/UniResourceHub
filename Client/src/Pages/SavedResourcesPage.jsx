@@ -18,7 +18,7 @@ const SavedResourcesPage = () => {
         const response = await axiosInstance.get("/resources/getSavedResources")
 
         if (response.status === 200) {
-          console.log(response.data.data);
+          // console.log(response.data.data);
           setSavedItems(response.data.data)
           setLoading(false);
         }
@@ -58,7 +58,7 @@ const SavedResourcesPage = () => {
 
 
     if (response.status === 201) {
-      console.log("Recent Download activity : ", response.data.data);
+      // console.log("Recent Download activity : ", response.data.data);
     }
 
   };
@@ -68,7 +68,7 @@ const SavedResourcesPage = () => {
 
     if (response.status === 200) {
       setSavedItems(savedItems.filter(item => item.id !== itemId));
-      console.log("Resource Unsaved : ",response.data.data);
+      // console.log("Resource Unsaved : ",response.data.data);
     }
 
   };

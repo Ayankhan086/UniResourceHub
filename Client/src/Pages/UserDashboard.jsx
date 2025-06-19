@@ -27,7 +27,7 @@ const UserDashboard = () => {
             const response = await axiosInstance.get("/activities/getdownloadedActivity")
 
             if (response.status === 200) {
-                console.log(response.data.data);
+                // console.log(response.data.data);
                 setDownloadCount(response.data.data[0]._count.type)
             }
 
@@ -38,7 +38,7 @@ const UserDashboard = () => {
             const response = await axiosInstance.get("/activities/getsavedActivity")
 
             if (response.status === 200) {
-                console.log(response.data.data);
+                // console.log(response.data.data);
                 setSaveCount(response.data.data[0]?._count.type)
             }
 
@@ -49,7 +49,7 @@ const UserDashboard = () => {
             const response = await axiosInstance.get("/activities/recentActivity")
 
             if (response.status === 200) {
-                console.log("Recents : ", response.data.data);
+                // console.log("Recents : ", response.data.data);
                 setRecentActivity(response.data.data)
             }
         }

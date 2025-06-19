@@ -34,7 +34,6 @@ const DepartmentsPage = () => {
     try {
       const response = axiosInstance.post('/departments/create', newDepartmentData);
       if (response.status === 200) {
-        console.log('Department created successfully:', response.data);
         setDepartments(prev => [...prev, response.data.data]); // Update departments state
         return;
       }
@@ -50,7 +49,7 @@ const DepartmentsPage = () => {
 
     try {
       // Simulate API call
-      console.log('Submitting:', { ...formData, file });
+      // console.log('Submitting:', { ...formData, file });
 
       setTimeout(() => {
         handleCreateDepartment(formData); // Use the correct handler
@@ -95,7 +94,7 @@ const DepartmentsPage = () => {
         const response = await axiosInstance.put(`/departments/${deptId}`, { name: newName });
         if (response.status === 200) {
           setDepartments(prev => prev.map(dept => dept.id === deptId ? { ...dept, name: newName } : dept));
-          console.log('Department renamed successfully:', response.data);
+          // console.log('Department renamed successfully:', response.data);
         }
       } catch (error) {
         console.error('Error renaming department:', error);
@@ -106,14 +105,14 @@ const DepartmentsPage = () => {
   const handleSearch = async (req, res) => {
     try {
 
-      console.log(searchQuery);
+      // console.log(searchQuery);
 
 
       const response = await axiosInstance.post("/departments/search", { searchQuery })
 
       if (response.status === 200) {
         setDepartments(response.data.data)
-        console.log(response.data.data);
+        // console.log(response.data.data);
       }
 
 
@@ -131,7 +130,7 @@ const DepartmentsPage = () => {
         setLoading(false)
         // Log the fetched departments
 
-        console.log('Departments fetched successfully:', response.data.data);
+        // console.log('Departments fetched successfully:', response.data.data);
 
       } else {
         console.error('Failed to fetch departments');

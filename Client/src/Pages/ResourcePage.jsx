@@ -55,7 +55,7 @@ const ResourcesPage = () => {
 
             if (response.status === 201) {
                 setResources(prev => prev ? [...prev, response.data.data] : [response.data.data]); // Ensure prev is an array
-                console.log("Created Resource : ", response.data.data);
+                // console.log("Created Resource : ", response.data.data);
                 setIsUploading(false);
                 handleCloseRModal();
                 setNewResourceName("");
@@ -66,14 +66,14 @@ const ResourcesPage = () => {
                 const response2 = await axiosInstance.post(`/activities/create_activity/${response.data.data.id}`, { activityType });
 
                 if (response2.status === 201) {
-                    console.log("Recent Upload activity : ", response.data.data);
+                    // console.log("Recent Upload activity : ", response.data.data);
                     toast.success("Your Resource Has Been Uploaded and is waiting for approval.");
                 } else {
-                    console.log(response2.statusText);
+                    // console.log(response2.statusText);
                     toast.error("Failed to log upload activity.");
                 }
             } else {
-                console.log("Something went wrong with resource upload.");
+                // console.log("Something went wrong with resource upload.");
                 toast.error("Failed to upload resource.");
             }
         } catch (error) {
@@ -103,7 +103,7 @@ const ResourcesPage = () => {
             const response = await axiosInstance.post(`/activities/create_activity/${resourceId}`, { activityType });
 
             if (response.status === 201) {
-                console.log("Recent Download activity : ", response.data.data);
+                // console.log("Recent Download activity : ", response.data.data);
                 toast.success("Resource downloaded successfully.");
             }
         } catch (err) {
@@ -118,10 +118,10 @@ const ResourcesPage = () => {
             const response = await axiosInstance.post(`/activities/create_activity/${resourceId}`, { activityType });
 
             if (response.status === 201) {
-                console.log("Recent Save activity : ", response.data.data);
+                // console.log("Recent Save activity : ", response.data.data);
                 toast.success("Resource saved successfully!");
             } else {
-                console.log(response.statusText);
+                // console.log(response.statusText);
                 toast.error("Failed to save resource.");
             }
         } catch (error) {
@@ -179,7 +179,7 @@ const ResourcesPage = () => {
                 if (response.status === 200) {
                     setDepartments(response.data.data);
                     setSelectedDept(response.data.data[0]); // Set the first department as selected
-                    console.log('Departments fetched successfully:', response.data.data);
+                    // console.log('Departments fetched successfully:', response.data.data);
                 } else {
                     console.error('Failed to fetch departments');
                     toast.error("Failed to load departments.");
@@ -211,9 +211,9 @@ const ResourcesPage = () => {
                     setResources(response.data.data.resources);
                     setCurrentPage(response.data.data.page);
                     setTotalPages(response.data.data.totalPages);
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 } else {
-                    console.log("Error fetching resources.");
+                    // console.log("Error fetching resources.");
                     toast.error("Failed to load resources.");
                 }
             } catch (error) {

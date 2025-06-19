@@ -79,7 +79,6 @@ const AdminDashboard = () => {
         const response = await axiosInstance.put(`/resources/togglePublication/${resourceId}`, { publishStatus })
 
         if (response.status === 200) {
-            console.log("Accepted : ", response.data.data);
             setRecentUploads(prevUploads => prevUploads.filter(upload => upload.id !== resourceId));
         }
     }
@@ -90,7 +89,6 @@ const AdminDashboard = () => {
         const response = await axiosInstance.put(`/resources/togglePublication/${resourceId}`, { publishStatus })
 
         if (response.status === 200) {
-            console.log("Rejected : ", response.data.data);
             setRecentUploads(prevUploads => prevUploads.filter(upload => upload.id !== resourceId));
         }
     }

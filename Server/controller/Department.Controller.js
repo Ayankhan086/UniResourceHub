@@ -14,7 +14,7 @@ export const createDepartment = async (req, res) => {
         if (req.body.tags) {
             tags = req.body.tags.split(',').map(tag => tag.trim());
         }
-        console.log(tags);
+        // console.log(tags);
 
         if (!name) {
             throw new ApiError(400, "Name is required.")
@@ -159,7 +159,7 @@ export const getDepartmentBySearch = async (req, res) => {
 
         const searchQuery = req.body.searchQuery;
 
-        console.log(searchQuery);
+        // console.log(searchQuery);
 
 
         const departments = await prisma.department.findMany({

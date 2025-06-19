@@ -14,7 +14,7 @@ export const createResource = async (req, res) => {
         if (req.body.keywords) {
             tags = req.body.keywords.split(',').map(tag => tag.trim());
         }
-        console.log(tags);
+        // console.log(tags);
         const deptId = req.params.deptId;
         const userId = req.user.id
 
@@ -32,7 +32,7 @@ export const createResource = async (req, res) => {
         }
 
 
-        console.log('Files received:', req.files);
+        // console.log('Files received:', req.files);
 
         let fileUploadResponse = null;
         let imageUploadResponse = null;
@@ -67,7 +67,7 @@ export const createResource = async (req, res) => {
             },
         });
 
-        console.log('Resource created:', resource);
+        // console.log('Resource created:', resource);
 
 
         // Send success response
@@ -85,9 +85,9 @@ export const createResource = async (req, res) => {
 export const getResources = async (req, res) => {
     try {
         const deptId = req.params.deptId;
-        console.log(req.query);
+        // console.log(req.query);
         const page = parseInt(req.query.page, 10) || 1;
-        console.log(page);
+        // console.log(page);
         const pageSize = 6;
 
         if (!deptId) {

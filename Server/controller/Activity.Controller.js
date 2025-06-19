@@ -178,7 +178,7 @@ export const getUserActivityCountByType = async (req, res) => {
             throw new ApiError(404, "No activities found for this user");
         }
 
-        console.log("Activity Count:", activityCount);
+        // console.log("Activity Count:", activityCount);
 
         return res.status(200).json(new ApiResponse(200, activityCount, "Activity count fetched successfully"));
 
@@ -202,7 +202,7 @@ export const getAllActivityCountByType = async (req, res) => {
             throw new ApiError(404, "No activities found");
         }
 
-        console.log("All Activity Count:", activityCount);
+        // console.log("All Activity Count:", activityCount);
 
         return res.status(200).json(new ApiResponse(200, activityCount, "All activity count fetched successfully"));
 
@@ -217,7 +217,7 @@ export const getUploadedResourceCount = async (req, res) => {
 
         const userId = req.user.id;
 
-        console.log(req.user);
+        // console.log(req.user);
 
 
         const uploadedActivity = await prisma.userActivity.groupBy({
