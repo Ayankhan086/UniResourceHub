@@ -135,10 +135,10 @@ const DepartmentsPage = () => {
         console.error('Failed to fetch departments');
       }
     };
-    if (!searchQuery) {
+    if (!searchQuery || departments) {
       fetchDepartments();
     }
-  }, [searchQuery]);
+  }, [searchQuery, departments]);
 
 
 
