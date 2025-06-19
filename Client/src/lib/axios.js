@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:3000/api/v1', // Change to your API base URL
+    baseURL: 'https://uni-resource-hub-18s1.vercel.app/api/v1', // Change to your API base URL
     headers: {
         'Content-Type': 'application/json',
     },
