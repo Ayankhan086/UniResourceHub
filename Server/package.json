@@ -7,9 +7,6 @@
     "vercel-build": "prisma generate && prisma migrate deploy",
     "postinstall": "prisma generate"
   },
-  "prisma": {
-    "schema": "prisma/schema.prisma"
-  },
   
   
   "keywords": [],
