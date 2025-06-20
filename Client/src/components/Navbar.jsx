@@ -3,6 +3,7 @@ import { useLocation, Link, NavLink } from 'react-router-dom';
 import { useAuthUserStore } from '../store/authUserStore';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../lib/axios';
+import favicon from "../../public/favicon.svg"
 
 const Navbar = () => {
     const location = useLocation();
@@ -32,7 +33,9 @@ const Navbar = () => {
                 {/* Logo/Brand */}
                 <Link to="/" className="flex items-center space-x-2 cursor-pointer select-none">
                     <span className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-white shadow-md border-2">
-                        <span className="text-xl font-extrabold text-indigo-700 ">UR</span>
+                        <span className="text-xl font-extrabold text-indigo-700 ">
+                          {favicon}
+                        </span>
                     </span>
                     <h1 className="text-xl sm:text-2xl font-extrabold text-white tracking-wide drop-shadow-lg">UniResource Hub</h1>
                 </Link>
