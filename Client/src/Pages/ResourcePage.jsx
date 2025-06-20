@@ -202,7 +202,8 @@ const ResourcesPage = () => {
             try {
                 const response = await axiosInstance.get(`/resources/getresources/${selectedDept.id}`, {
                     params: {
-                        page: currentPage
+                        page: currentPage,
+                        searchQuery: searchQuery // Pass search query to backend for server-side filtering
                     }
                 });
 
