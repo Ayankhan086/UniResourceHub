@@ -472,7 +472,7 @@ const ResourcesPage = () => {
                                                             <FiSave className="mr-1" size={14} /> Save
                                                         </button>
                                                         <button className="flex cursor-pointer items-center px-3 py-1 bg-blue-50 text-blue-600  hover:bg-blue-100 text-sm hover:text-blue-900 mr-3">
-                                                            <a href={resource?.File || resource?.image} target="_blank" rel="noopener noreferrer"><FiEye className="mr-1" size={14}/> View</a>
+                                                            <a className='flex cursor-pointer items-center px-3 py-1  bg-blue-50 text-blue-600  hover:bg-blue-100 text-sm hover:text-blue-900 mr-3 style-none' href={resource?.File || resource?.image} target="_blank" rel="noopener noreferrer"><FiEye className="mr-1" size={14}/> View</a>
                                                         </button>
                                                         {isAdmin &&
                                                             <>
