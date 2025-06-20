@@ -52,7 +52,7 @@ const AdminDashboard = () => {
             const response = await axiosInstance.get("/activities/getalldownloadedActivity")
 
             if (response.status === 200) {
-                setDownload(response.data.data[0]._count.type)
+                setDownload(response.data.data[0]?._count.type)
 
             }
         }
