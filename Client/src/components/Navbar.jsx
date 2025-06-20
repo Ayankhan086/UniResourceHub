@@ -34,7 +34,7 @@ const Navbar = () => {
                 <Link to="/" className="flex items-center space-x-2 cursor-pointer select-none">
                     <span className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-white shadow-md border-2">
                         <span className="text-xl font-extrabold text-indigo-700 ">
-                          {favicon}
+                            <img src={favicon} alt="favicon" className="h-8 w-8" />
                         </span>
                     </span>
                     <h1 className="text-xl sm:text-2xl font-extrabold text-white tracking-wide drop-shadow-lg">UniResource Hub</h1>
