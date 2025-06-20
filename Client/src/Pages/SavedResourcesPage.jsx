@@ -110,7 +110,7 @@ const SavedResourcesPage = () => {
             <p className="mt-1 text-gray-500">Resources you save will appear here</p>
           </div>
         ) : (
-          <div className="bg-white shadow rounded-lg sm:overflow-scroll md:overflow-hidden lg:overflow-hidden">
+          <div className="bg-white shadow rounded-lg overflow-auto sm:overflow-scroll md:overflow-hidden lg:overflow-hidden">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
