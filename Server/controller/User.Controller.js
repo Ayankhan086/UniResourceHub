@@ -84,7 +84,7 @@ const loginUser = async (req, res) => {
                 id: true,
                 email: true,
                 createdAt: true, // add other fields you want to return
-                password: true 
+                password: true
             }
         })
 
@@ -112,6 +112,7 @@ const loginUser = async (req, res) => {
         const options = {
             httpOnly: true,
             secure: true, // Set to true if using HTTPS
+            sameSite: "none"
         }
 
         return res.status(200)
@@ -147,11 +148,17 @@ const logoutUser = async (req, res) => {
             }
         })
 
+        const cookieOptions = {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none"
+        };
+
         return res.status(200)
-            .cookie("accessToken", "", { expires: new Date(0) })
+            .cookie("accessToken", "", { ...cookieOptions, expires: new Date(0) })
             .json(
                 new ApiResponse(200, blacklistToken, "User Logged Out.")
-            )
+            );
 
     } catch (error) {
         console.error(error.message);
@@ -160,16 +167,16 @@ const logoutUser = async (req, res) => {
 }
 
 const getAllUsersCount = async (req, res) => {
-     try {
+    try {
         const AllUsersCount = await prisma.user.findMany()
 
         return res.status(200).json(
             new ApiResponse(200, AllUsersCount, "All Users Count Fetched.")
         )
 
-     } catch (error) {
+    } catch (error) {
         throw new ApiError(501, "Internal Server Error", error)
-     }
+    }
 }
 
 
