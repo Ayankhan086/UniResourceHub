@@ -239,9 +239,9 @@ const ResourcesPage = () => {
         return (
             <>
                 <Navbar />
-            <div className="flex justify-center items-center h-screen bg-gray-50">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-            </div>
+                <div className="flex justify-center items-center h-screen bg-gray-50">
+                    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+                </div>
             </>
         );
     }
@@ -470,6 +470,9 @@ const ResourcesPage = () => {
                                                             className="flex cursor-pointer items-center px-3 py-1 bg-green-50 text-green-600 rounded hover:bg-green-100 text-sm"
                                                         >
                                                             <FiSave className="mr-1" size={14} /> Save
+                                                        </button>
+                                                        <button className="text-blue-600 hover:text-blue-900 mr-3">
+                                                            <a href={resource?.File || resource?.image} target="_blank" rel="noopener noreferrer">View</a>
                                                         </button>
                                                         {isAdmin &&
                                                             <>
