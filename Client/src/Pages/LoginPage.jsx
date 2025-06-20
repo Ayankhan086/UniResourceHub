@@ -29,8 +29,8 @@ export default function LoginPage() {
             cookie.set('accessToken', response.data.data.accessToken, { expires: 7 });
             navigate('/home');
         } catch (error) {
-            if (error.response && error.response.data && error.response.data.message) {
-                toast.error(error.response.data.message);
+            if (error.message && error.response.data && error.response.data.message) {
+                toast.error(error.message);
             } else {
                 toast.error('An error occurred while logging in. Please try again.');
             }
