@@ -33,7 +33,7 @@ const Navbar = () => {
                 {/* Logo/Brand */}
                 <Link to="/" className="flex items-center space-x-2 cursor-pointer select-none">
                     <span className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-white shadow-md border-2">
-                        <span className="text-xl font-extrabold text-indigo-700 ">
+                        <span className="text-xl font-extrabold text-indigo-700 rounded-full">
                             <img src={favicon} alt="favicon" className="h-8 w-8 rounded-full" />
                         </span>
                     </span>
