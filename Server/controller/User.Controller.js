@@ -154,7 +154,7 @@ const logoutUser = async (req, res) => {
             )
 
     } catch (error) {
-        console.error(error);
+        console.error(error.message);
         throw new ApiError(501, "Internal Server Error.")
     }
 }
