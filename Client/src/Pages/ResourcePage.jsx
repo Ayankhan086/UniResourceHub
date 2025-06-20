@@ -224,14 +224,25 @@ const ResourcesPage = () => {
             }
         };
 
-        getResourcesForSelectedDept();
-    }, [selectedDept, currentPage]);
+        if (!searchQuery) {
+            getResourcesForSelectedDept();
+        }
+    }, [selectedDept, currentPage, searchQuery]);
 
 
-    const handleSearch = () => {
-        // Trigger useEffect by updating searchQuery, which will refetch resources
-        // The actual search logic is now integrated into getResourcesForSelectedDept
-        setCurrentPage(1); // Reset to first page on new search
+    const handleSearch = async () => {
+        const response = await axiosInstance.post(`/resources/search/${selectedDept.id}`, {
+            params: {
+                searchQuery: searchQuery
+            }
+        })
+        if (response.status === 200) {
+            setResources(response.data.data.resources);
+            setCurrentPage(1);
+            setTotalPages(response.data.data.totalPages);
+        } else {
+            toast.error("Failed to load resources.");
+        }
     };
 
 
@@ -460,7 +471,7 @@ const ResourcesPage = () => {
                                                 <td className="px-6 py-4 whitespace-nowrap">
                                                     <div className="flex flex-wrap gap-2"> {/* Changed to flex-wrap for actions */}
                                                         <button className="flex cursor-pointer items-center px-3 py-1 bg-blue-50 text-blue-600  hover:bg-blue-100 text-sm hover:text-blue-900 mr-3">
-                                                            <a className='flex cursor-pointer items-center px-3 py-1  bg-blue-50 text-blue-600  hover:bg-blue-100 text-sm hover:text-blue-900 mr-3 style-none' href={resource?.File || resource?.image} target="_blank" rel="noopener noreferrer"><FiEye className="mr-1 inline" size={14}/> View</a>
+                                                            <a className='flex cursor-pointer items-center px-3 py-1  bg-blue-50 text-blue-600  hover:bg-blue-100 text-sm hover:text-blue-900 mr-3 style-none' href={resource?.File || resource?.image} target="_blank" rel="noopener noreferrer"><FiEye className="mr-1 inline" size={14} /> View</a>
                                                         </button>
                                                         <button
                                                             onClick={() => handleDownload(resource.id, resource.File, resource.image)}
