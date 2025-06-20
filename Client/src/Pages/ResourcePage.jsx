@@ -252,13 +252,13 @@ const ResourcesPage = () => {
 
                 {showMenu ?
                     <div className="w-full md:w-64 bg-white border-b md:border-r border-gray-200 p-4 overflow-y-auto">
-                        <h2 className="text-lg font-semibold mb-4 text-gray-800 flex justify-between mr-2 items-center">Departments <span onClick={() => { setShowMenu(!showMenu) }}><FiX className='inline'  size={25}/></span></h2>
+                        <h2 className="text-lg font-semibold mb-4 text-gray-800 flex justify-between mr-2 items-center">Departments <span onClick={() => { setShowMenu(!showMenu) }}><FiX className='inline cursor-pointer'  size={25}/></span></h2>
                         <ul className="space-y-2">
                             {departments && departments.map((dept) => (
                                 <li key={dept.id}>
                                     <button
                                         onClick={() => setSelectedDept(dept)}
-                                        className={`w-full flex justify-between items-center p-2 rounded-lg transition-colors ${selectedDept && selectedDept.id === dept.id ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-100'}`}
+                                        className={`w-full cursor-pointer flex justify-between items-center p-2 rounded-lg transition-colors ${selectedDept && selectedDept.id === dept.id ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-100'}`}
                                     >
                                         <span>{dept.name}</span>
                                         <div className="flex items-center">
@@ -271,7 +271,7 @@ const ResourcesPage = () => {
                     </div> :
                     <div className='bg-gray-300 md:block md:pt-3 lg:pt-4 sm:flex sm:items-center p-2'>
                         <button onClick={() => { setShowMenu(!showMenu) }}>
-                            <FiMenu className='text-[18px]' />
+                            <FiMenu className='text-[18px] cursor-pointer' />
                         </button>
                     </div>
                 }
