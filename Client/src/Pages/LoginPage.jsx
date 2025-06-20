@@ -23,11 +23,16 @@ export default function LoginPage() {
                 setIsAdmin(true);
             }
             const response = await axiosInstance.post('/users/login', data);
-            toast.success('Login successful!');
-            setUser(response.data.data.user);
-            setToken(response.data.data.accessToken);
-            cookie.set('accessToken', response.data.data.accessToken, { expires: 7 });
-            navigate('/home');
+            if(response.status === 200){
+                toast.success('Login successful!');
+                setUser(response.data.data.user);
+                setToken(response.data.data.accessToken);
+                cookie.set('accessToken', response.data.data.accessToken, { expires: 7 });
+                navigate('/home');
+            }
+            else if(response.status === 401){
+                toast.error("Email or Password in Incorrect.");
+            }
         } catch (error) {
             if (error.message && error.response.data && error.response.data.message) {
                 toast.error(error.message);
