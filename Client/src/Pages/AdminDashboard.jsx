@@ -25,7 +25,7 @@ const AdminDashboard = () => {
             const response = await axiosInstance.get("/users/all")
 
             if (response.status === 200) {
-                setUsers(response.data.data.length)
+                setUsers(response.data.data?.length)
             }
         }
         getAllUsersCount();
@@ -34,7 +34,7 @@ const AdminDashboard = () => {
             const response = await axiosInstance.get("/resources/all")
 
             if (response.status === 200) {
-                setResources(response.data.data.length)
+                setResources(response.data.data?.length)
             }
         }
         getAllResourcesCount()
@@ -43,7 +43,7 @@ const AdminDashboard = () => {
             const response = await axiosInstance.get("/departments/all")
 
             if (response.status === 200) {
-                setDepartment(response.data.data.length)
+                setDepartment(response.data.data?.length)
             }
         }
         getAllDepartmentCount()
