@@ -252,7 +252,7 @@ const ResourcesPage = () => {
 
                 {showMenu ?
                     <div className="w-full md:w-64 bg-white border-b md:border-r border-gray-200 p-4 overflow-y-auto">
-                        <h2 className="text-lg font-semibold mb-4 text-gray-800 flex justify-between mr-2 items-center">Departments <span onClick={() => { setShowMenu(!showMenu) }}><FiX className='inline cursor-pointer'  size={25}/></span></h2>
+                        <h2 className="text-lg font-semibold mb-4 text-gray-800 flex justify-between mr-2 items-center">Departments <span onClick={() => { setShowMenu(!showMenu) }}><FiX className='inline cursor-pointer' size={25} /></span></h2>
                         <ul className="space-y-2">
                             {departments && departments.map((dept) => (
                                 <li key={dept.id}>
@@ -521,7 +521,9 @@ const ResourcesPage = () => {
                             </div>
                         </>
                     ) : (
-                        <div className="text-center text-gray-500">Select a department to view resources.</div>
+                        <div className="flex justify-center items-center h-screen bg-gray-50">
+                            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+                        </div>
                     )}
                 </div>
             </div>
