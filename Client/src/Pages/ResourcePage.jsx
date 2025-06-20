@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FiDownload, FiUpload, FiSave, FiSearch, FiX, FiDelete, FiEdit, FiMenu, FiCrosshair } from 'react-icons/fi';
+import { FiDownload, FiUpload, FiSave, FiSearch, FiX, FiDelete, FiEdit, FiMenu, FiCrosshair, FiEye } from 'react-icons/fi';
 import { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import axiosInstance from '../lib/axios'; // Adjust the import path as necessary
@@ -472,7 +472,7 @@ const ResourcesPage = () => {
                                                             <FiSave className="mr-1" size={14} /> Save
                                                         </button>
                                                         <button className="text-blue-600 hover:text-blue-900 mr-3">
-                                                            <a href={resource?.File || resource?.image} target="_blank" rel="noopener noreferrer">View</a>
+                                                            <a href={resource?.File || resource?.image} target="_blank" rel="noopener noreferrer"><FiEye className="mr-1" size={14}/> View</a>
                                                         </button>
                                                         {isAdmin &&
                                                             <>
