@@ -347,7 +347,6 @@ const ResourcesPage = () => {
                                                                 <span className="text-indigo-700 font-medium">Select File</span>
                                                                 <input
                                                                     type="file"
-                                                                    accept=".pdf,.doc,.docx,.ppt,.pptx"
                                                                     onChange={e => setFile(e.target.files[0])}
                                                                     className="hidden"
                                                                     required
