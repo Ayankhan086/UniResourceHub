@@ -34,7 +34,7 @@ export default function LoginPage() {
                 toast.error("Email or Password in Incorrect.");
             }
         } catch (error) {
-            if (error.message && error.response.data && error.response.data.message) {
+            if (error.message ) {
                 toast.error(error.message);
             } else {
                 toast.error('An error occurred while logging in. Please try again.');

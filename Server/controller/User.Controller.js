@@ -111,7 +111,7 @@ const loginUser = async (req, res) => {
 
         const options = {
             httpOnly: true,
-            secure: false, // Set to true if using HTTPS
+            secure: true, // Set to true if using HTTPS
         }
 
         return res.status(200)
