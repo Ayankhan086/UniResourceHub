@@ -276,10 +276,6 @@ const DepartmentsPage = () => {
                       <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Active</span>
                     </div>
                   </div>
-                  <div className="flex justify-between mt-4 text-sm text-gray-600">
-                    <span>{dept._count.courses} courses</span>
-                    <span>{dept._count.resources} resources</span>
-                  </div>
                   <NavLink to="/resources" className="block mt-4 text-blue-600 hover:underline">
                     <button className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors">
                       View Resources
