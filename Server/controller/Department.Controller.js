@@ -159,17 +159,34 @@ export const getDepartmentBySearch = async (req, res) => {
 
         const searchQuery = req.body.searchQuery;
 
-        // console.log(searchQuery);
-
-
         const departments = await prisma.department.findMany({
             where: {
                 OR: [
+
+                    {
+                        name: {
+                            contains: searchQuery,
+                            mode: 'insensitive'
+                        }
+                    },
+                    {
+                        name: {
+                            startsWith: searchQuery,
+                            mode: 'insensitive'
+                        }
+                    },
+                    {
+                        name: {
+                            endsWith: searchQuery,
+                            mode: 'insensitive'
+                        }
+                    },
                     {
                         tags: {
                             has: searchQuery
                         }
                     }
+
                 ]
             },
             include: {
@@ -183,7 +200,7 @@ export const getDepartmentBySearch = async (req, res) => {
         });
 
         if (!departments || departments.length === 0) {
-            throw new ApiError(401, "No Resource Found.")
+            new ApiResponse(401, null, "No Rsource Found")
         }
 
         return res.status(200).json(

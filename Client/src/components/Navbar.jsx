@@ -3,7 +3,7 @@ import { useLocation, Link, NavLink } from 'react-router-dom';
 import { useAuthUserStore } from '../store/authUserStore';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../lib/axios';
-import favicon from "../../public/favicon.svg"
+import favicon from "../assets/favicon.svg"
 
 const Navbar = () => {
     const location = useLocation();

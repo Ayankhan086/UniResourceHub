@@ -105,22 +105,30 @@ export const getResources = async (req, res) => {
 
         // Count total resources for pagination info
         const totalResources = await prisma.resource.count({
-            where: { AND:[
-                {departmentId: Number(deptId)},
-                {publishStatus:{
-                    in: ["PUBLISHED"]
-                }}
-            ] },
+            where: {
+                AND: [
+                    { departmentId: Number(deptId) },
+                    {
+                        publishStatus: {
+                            in: ["PUBLISHED"]
+                        }
+                    }
+                ]
+            },
         });
 
         // Fetch paginated resources
         const resources = await prisma.resource.findMany({
-            where: { AND:[
-                {departmentId: Number(deptId)},
-                {publishStatus:{
-                    in: ["PUBLISHED"]
-                }}
-            ] },
+            where: {
+                AND: [
+                    { departmentId: Number(deptId) },
+                    {
+                        publishStatus: {
+                            in: ["PUBLISHED"]
+                        }
+                    }
+                ]
+            },
             skip: (page - 1) * pageSize,
             take: pageSize,
         });
@@ -220,9 +228,10 @@ export const toggleResourcePublicationStatus = async (req, res) => {
 
 export const getResourcesBySearch = async (req, res) => {
     try {
-
         const { searchQuery } = req.body;
-        const deptId = req.params.deptId
+        const deptId = req.params.deptId;
+        const page = parseInt(req.query.page, 10) || 1;
+        const pageSize = 6;
 
         const department = await prisma.department.findFirst({
             where: { id: Number(deptId) },
@@ -232,48 +241,65 @@ export const getResourcesBySearch = async (req, res) => {
             throw new ApiError(404, 'Department not found');
         }
 
-        const resources = await prisma.resource.findMany({
-            where: {
-                departmentId: Number(deptId),
-                publishStatus: {in: ["PUBLISHED"]},
-                OR: [
-                    {
-                        name: {
-                            contains: searchQuery.trim(),
-                            mode: 'insensitive'
-                        }
-                    },
-                    {
-                        name: {
-                            startsWith: searchQuery.trim(),
-                            mode: 'insensitive'
-                        }
-                    },
-                    {
-                        name: {
-                            endsWith: searchQuery.trim(),
-                            mode: 'insensitive'
-                        }
-                    },
-                    {
-                        tags: {
-                            has: searchQuery.trim()
-                        }
+        // Build the search filter
+        const searchFilter = {
+            departmentId: Number(deptId),
+            publishStatus: { in: ["PUBLISHED"] },
+            OR: [
+                {
+                    name: {
+                        contains: searchQuery,
+                        mode: 'insensitive'
                     }
-                ]
-            },
+                },
+                {
+                    name: {
+                        startsWith: searchQuery,
+                        mode: 'insensitive'
+                    }
+                },
+                {
+                    name: {
+                        endsWith: searchQuery,
+                        mode: 'insensitive'
+                    }
+                },
+                {
+                    tags: {
+                        has: searchQuery
+                    }
+                }
+            ]
+        };
+
+        // Get total count for pagination
+        const totalResources = await prisma.resource.count({
+            where: searchFilter,
+        });
+
+        // Fetch paginated resources
+        const resources = await prisma.resource.findMany({
+            where: searchFilter,
+            skip: (page - 1) * pageSize,
+            take: pageSize,
         });
 
         if (!resources || resources.length === 0) {
-            throw new ApiError(401, "No Resource Found.")
+            throw new ApiError(401, "No Resource Found.");
         }
 
         return res.status(200).json(
-            new ApiResponse(200, resources, 'Resources fetched successfully')
+            new ApiResponse(200, {
+                resources,
+                page,
+                totalResources,
+                totalPages: Math.ceil(totalResources / pageSize)
+            }, 'Resources fetched successfully')
         );
 
     } catch (error) {
-        throw new ApiError(500, 'Internal Server Error', error.message);
+        console.log(error);
+        throw new ApiError(500, 'Internal Server Error');
     }
 }
 
@@ -332,7 +358,7 @@ export const getSavedResourcesOfUser = async (req, res) => {
         });
 
         if (!activitySaveType || activitySaveType.length === 0) {
-            new ApiResponse(400, null,'Cannot Find Resources.');
+            new ApiResponse(400, null, 'Cannot Find Resources.');
         }
 
         // Get all resource IDs
@@ -381,7 +407,7 @@ export const getAllResourcesCount = async (req, res) => {
 
 export const getAllUploadedResources = async (req, res) => {
     try {
-        
+
         const resources = await prisma.resource.findMany({
             where: {
                 publishStatus: 'WAITING_FOR_APPROVAL'
@@ -391,7 +417,7 @@ export const getAllUploadedResources = async (req, res) => {
                     select: { name: true }
                 },
                 user: {
-                    select: {username : true}
+                    select: { username: true }
                 }
             }
         });

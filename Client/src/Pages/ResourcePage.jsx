@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FiDownload, FiUpload, FiSave, FiSearch, FiX, FiDelete, FiEdit, FiMenu, FiCrosshair, FiEye } from 'react-icons/fi';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
+import debounce from "lodash.debounce";
 import Navbar from '../components/Navbar';
 import axiosInstance from '../lib/axios'; // Adjust the import path as necessary
 import fileDownload from 'js-file-download'
@@ -28,7 +29,7 @@ const ResourcesPage = () => {
     const [newName, setNewName] = useState(''); // This state variable is declared but not used
 
     // Adding a state for loading, which you already have
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const handleOpenRModal = () => setIsRModalOpen(true);
 
@@ -172,6 +173,7 @@ const ResourcesPage = () => {
         }
     };
 
+    
     useEffect(() => {
         const fetchDepartments = async () => {
             try {
@@ -193,57 +195,48 @@ const ResourcesPage = () => {
     }, []);
 
     useEffect(() => {
-        const getResourcesForSelectedDept = async () => {
-            if (!selectedDept) {
-                setLoading(false);
-                return;
-            }
-            setLoading(true);
-            try {
-                const response = await axiosInstance.get(`/resources/getresources/${selectedDept.id}`, {
-                    params: {
-                        page: currentPage,
-                        searchQuery: searchQuery // Pass search query to backend for server-side filtering
-                    }
-                });
+        setCurrentPage(1);
+    }, [selectedDept, searchQuery]);
 
+    const debouncedSearch = useCallback(
+        debounce(async (searchQuery, selectedDept, page) => {
+            if (!selectedDept) return;
+            try {
+                let response;
+                if (searchQuery) {
+                    response = await axiosInstance.post(
+                        `/resources/search/${selectedDept.id}?page=${page}`,
+                        { searchQuery }
+                    );
+                } else {
+                    response = await axiosInstance.get(
+                        `/resources/getresources/${selectedDept.id}`,
+                        { params: { page } }
+                    );
+                }
                 if (response.status === 200) {
                     setResources(response.data.data.resources);
-                    setCurrentPage(response.data.data.page);
+                    setCurrentPage(response.data.data.page || page);
                     setTotalPages(response.data.data.totalPages);
-                    // console.log(response.data.data);
                 } else {
-                    // console.log("Error fetching resources.");
                     toast.error("Failed to load resources.");
                 }
             } catch (error) {
-                console.error("Error fetching resources:", error);
                 toast.error("An error occurred while fetching resources.");
+                console.error(error);
             } finally {
                 setLoading(false);
             }
-        };
+        }, 400),
+        []
+    );
 
-        if (!searchQuery) {
-            getResourcesForSelectedDept();
-        }
-    }, [selectedDept, currentPage, searchQuery]);
+    // Main effect for fetching/searching resources
+    useEffect(() => {
+        debouncedSearch(searchQuery, selectedDept, currentPage);
+        return () => debouncedSearch.cancel();
+    }, [searchQuery, selectedDept, currentPage, debouncedSearch]);
 
-
-    const handleSearch = async () => {
-        const response = await axiosInstance.post(`/resources/search/${selectedDept.id}`, {
-            params: {
-                searchQuery: searchQuery
-            }
-        })
-        if (response.status === 200) {
-            setResources(response.data.data.resources);
-            setCurrentPage(1);
-            setTotalPages(response.data.data.totalPages);
-        } else {
-            toast.error("Failed to load resources.");
-        }
-    };
 
 
     if (loading) {
@@ -316,16 +309,10 @@ const ResourcesPage = () => {
                                             placeholder="Search resources..."
                                             value={searchQuery}
                                             onChange={(e) => setSearchQuery(e.target.value)}
-                                            onKeyDown={(e) => {
-                                                if (e.key === 'Enter') {
-                                                    e.preventDefault();
-                                                    handleSearch();
-                                                }
-                                            }}
                                             className="w-[250px] pl-12 pr-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-300 bg-gray-50 text-gray-800"
                                         />
                                         <div className="absolute inset-y-0 left-0 bottom-0 flex items-center pl-4 pointer-events-none">
-                                            <FiSearch className="w-5 h-5 text-gray-500" />
+                                            <FiSearch className="w-5 h-5 text-gray-500 cursor-pointer" />
                                         </div>
                                     </div>
                                 )}
@@ -453,8 +440,8 @@ const ResourcesPage = () => {
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y divide-gray-200">
-                                        {(selectedDept && resources) && resources.filter(prev => ((prev.publishStatus !== "WAITING_FOR_APPROVAL") && (prev.publishStatus !== "REJECTED"))).map((resource) => (
-                                            <tr key={resource.id}>
+                                        {(selectedDept && resources) && resources.filter(prev => ((prev.publishStatus !== "WAITING_FOR_APPROVAL") && (prev.publishStatus !== "REJECTED"))).map((resource, index) => (
+                                            <tr key={index}>
                                                 <td className="px-6 py-4 whitespace-nowrap">
                                                     <div className="font-medium text-gray-900">{resource.name}</div>
                                                 </td>
@@ -538,9 +525,7 @@ const ResourcesPage = () => {
                             </div>
                         </>
                     ) : (
-                        <div className="flex justify-center items-center h-screen bg-gray-50">
-                            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-                        </div>
+                        <></>
                     )}
                 </div>
             </div>

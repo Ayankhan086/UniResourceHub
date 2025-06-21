@@ -1,9 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
+import debounce from 'lodash.debounce';
+import toast from 'react-hot-toast';
 import Navbar from '../components/Navbar';
 import { NavLink } from 'react-router-dom';
 import { useAuthUserStore } from '../store/authUserStore';
 import axiosInstance from '../lib/axios';
-import { useEffect } from 'react';
 import { FiX } from 'react-icons/fi';
 import { FiEdit2 } from 'react-icons/fi';
 
@@ -101,44 +102,48 @@ const DepartmentsPage = () => {
     }
   };
 
-  const handleSearch = async (req, res) => {
-    try {
-
-      // console.log(searchQuery);
-
-
-      const response = await axiosInstance.post("/departments/search", { searchQuery })
-
-      if (response.status === 200) {
-        setDepartments(response.data.data)
-        // console.log(response.data.data);
+  const debouncedSearch = useCallback(
+    debounce(async (query) => {
+      try {
+        const response = await axiosInstance.post("/departments/search", { searchQuery: query });
+        if (response.status === 200) {
+          setDepartments(response.data.data);
+        }
+      } catch (error) {
+        toast.error('Failed to fetch departments');
+        console.error('Failed to fetch departments', error);
       }
 
+    }, 400),
+    []
+  );
 
-    } catch (error) {
-      console.error('Failed to fetch departments');
-    }
-  }
-
+  // Effect for search and fetch all
   useEffect(() => {
-    const fetchDepartments = async () => {
-      const response = await axiosInstance.get('/departments/all');
-      if (response.status === 200) {
-
-        setDepartments(response.data.data);
-        setLoading(false)
-        // Log the fetched departments
-
-        // console.log('Departments fetched successfully:', response.data.data);
-
-      } else {
-        console.error('Failed to fetch departments');
-      }
-    };
-    if (!searchQuery || departments) {
+    setLoading(true);
+    if (searchQuery) {
+      setLoading(false);
+      debouncedSearch(searchQuery);
+    } else {
+      const fetchDepartments = async () => {
+        try {
+          const response = await axiosInstance.get('/departments/all');
+          if (response.status === 200) {
+            setDepartments(response.data.data);
+          }
+        } catch (error) {
+          toast.error('Failed to fetch departments');
+          console.error('Failed to fetch departments', error);
+        } finally {
+          setLoading(false);
+        }
+      };
       fetchDepartments();
     }
-  }, [searchQuery, departments]);
+    return () => debouncedSearch.cancel();
+  }, [searchQuery, debouncedSearch]);
+
+
 
 
 
@@ -182,7 +187,6 @@ const DepartmentsPage = () => {
                   className="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-64"
                 />
                 <svg
-                  onClick={handleSearch}
                   className="w-5 h-5 text-gray-400 absolute left-3 top-2.5 cursor-pointer"
                   fill="none"
                   stroke="currentColor"
