@@ -15,9 +15,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors({
-   origin: ["https://uni-resource-hub.vercel.app"], // Change to your frontend URL for production
-   credentials: true,
-   allowedHeaders: ['Content-Type', 'Authorization']
+    origin: ["https://uni-resource-hub.vercel.app", "http://localhost:5173"], // Change to your frontend URL for production
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.get("/", (req, res) => {

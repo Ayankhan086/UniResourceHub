@@ -1,7 +1,7 @@
 import { ApiError } from '../utils/ApiError.js';
 import { ApiResponse } from '../utils/ApiResponse.js';
 import { PrismaClient } from '../generated/client/client.js';
-import { uploadOnCloudinary } from '../utils/cloudinary.js';
+import { uploadToR2 } from '../utils/r2.js';
 
 const prisma = new PrismaClient();
 
@@ -40,17 +40,17 @@ export const createResource = async (req, res) => {
 
         if (req.files.file) {
             const fileLocalPath = req.files.file[0].path;
-            fileUploadResponse = await uploadOnCloudinary(fileLocalPath);
+            fileUploadResponse = await uploadToR2(fileLocalPath);
             if (!fileUploadResponse) {
-                throw new ApiError(500, 'Failed to upload file to Cloudinary');
+                throw new ApiError(500, 'Failed to upload file to Cloudflare R2');
             }
         }
 
         if (req.files.image) {
             const imageLocalPath = req.files.image[0].path;
-            imageUploadResponse = await uploadOnCloudinary(imageLocalPath);
+            imageUploadResponse = await uploadToR2(imageLocalPath);
             if (!imageUploadResponse) {
-                throw new ApiError(500, 'Failed to upload image to Cloudinary');
+                throw new ApiError(500, 'Failed to upload image to Cloudflare R2');
             }
         }
 
