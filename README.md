@@ -1,31 +1,118 @@
 # UniResourceHub 🎓
- <!-- Add a banner image if available -->
 
-A centralized platform for university students to share and access academic resources like notes, past papers, and study guides.
+UniResourceHub is a professional, high-performance platform designed for university students to share, discover, and manage academic resources. It features **AI-powered Semantic Search**, **Cloudflare R2 storage**, and a robust **Admin approval system**.
 
-[![Live Demo](https://img.shields.io/badge/Demo-Live-green?style=for-the-badge&logo=vercel)](https://uni-resource-hub.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/Demo-Live-blue?style=for-the-badge&logo=vercel)](https://uni-resource-hub-18s1.vercel.app/)
 
-## ✨ Features
+## 🚀 Key Features
 
-- **Resource Sharing**: Upload/download notes, papers, and study materials
-- **Course-Specific Content**: Organized by departments and courses
-- **User Profiles**: Track your contributions and downloads
-- **Search & Filters**: Find resources quickly
-- **Ratings System**: Crowdsourced quality control
+- **🧠 Semantic AI Search**: Uses Google Gemini Embeddings and `pgvector` to understand the *meaning* of your searches, not just keywords.
+- **⚡ Hybrid Search Engine**: Combines vector similarity with traditional keyword matching for the most accurate results.
+- **☁️ Cloudflare R2 Storage**: Scalable, high-speed S3-compatible storage for all PDFs, images, and documents.
+- **🛡️ Admin Dashboard**: Secure moderation system where admins can approve or reject uploaded resources.
+- **📱 Responsive Design**: Modern, glassmorphic UI built with React and Tailwind CSS.
+- **🔐 Secure Authentication**: JWT-based auth with protected routes and role-based access.
+- **💤 Optimized Performance**: Route-level lazy loading and Suspense for a smooth user experience.
+
+---
 
 ## 🛠 Tech Stack
 
-**Frontend:**
-![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
+### Frontend
+- **React 18** (with Hooks & Context)
+- **Tailwind CSS** (Modern styling)
+- **React Router Dom** (Lazy loading & Suspense)
+- **Axios** (API communication)
+- **React Hot Toast** (Notifications)
 
-**Backend:**
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white)
-![Express](https://img.shields.io/badge/Express-000000?style=flat&logo=express&logoColor=white)
+### Backend
+- **Node.js & Express**
+- **Prisma ORM** (Database management)
+- **PostgreSQL (Neon)** with `pgvector` extension
+- **Google GenAI SDK** (Gemini Embeddings)
+- **AWS SDK (S3)** (Cloudflare R2 Integration)
+- **Multer** (File handling)
 
-**Database:**
-![PostgreSQl](https://img.shields.io/badge/POSTGRE_SQL-000000?style=flat&logo=postgresql&logoColor=white)
+---
 
-**Deployment:**
-![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat&logo=vercel&logoColor=white)
+## ⚙️ Setup Instructions
 
+### 1. Prerequisites
+- Node.js installed
+- PostgreSQL database (with `pgvector` extension enabled)
+- Google Gemini API Key
+- Cloudflare R2 Bucket credentials
+
+### 2. Environment Variables
+Create a `.env` file in the `Server` directory:
+
+```env
+PORT=3000
+DATABASE_URL="your-postgresql-url"
+GEMINI_API_KEY="your-gemini-api-key"
+
+# Cloudflare R2
+R2_ENDPOINT="your-r2-endpoint"
+R2_ACCESS_KEY="your-access-key"
+R2_SECRET_KEY="your-secret-key"
+R2_BUCKET="your-bucket-name"
+R2_PUBLIC_URL="your-public-bucket-url"
+
+# Auth
+JWT_SECRET="your-secret"
+ACCESS_TOKEN_EXPIRY="1d"
+```
+
+### 3. Installation
+```bash
+# Install dependencies for both Client and Server
+cd Client && npm install
+cd ../Server && npm install
+
+# Generate Prisma Client
+npx prisma generate
+```
+
+### 4. Database Setup (Crucial for Vector Search)
+```bash
+# 1. Run migrations
+npx prisma migrate dev
+
+# 2. Setup Vector Indices (HNSW)
+node scripts/setupVectorIndices.js
+
+# 3. Populate existing data with embeddings
+node scripts/populateEmbeddings.js
+```
+
+### 5. Running the Project
+```bash
+# Run Backend (from Server dir)
+npm run dev
+
+# Run Frontend (from Client dir)
+npm run dev
+```
+
+---
+
+## 📂 Project Structure
+
+```
+UniResourceHub/
+├── Client/                 # React Frontend
+│   ├── src/
+│   │   ├── Pages/         # Route-level components
+│   │   ├── components/    # Reusable UI elements
+│   │   ├── lib/           # Axios & configuration
+│   │   └── store/         # State management
+├── Server/                 # Express Backend
+│   ├── controller/        # Business logic
+│   ├── middleware/        # Auth & validation
+│   ├── prisma/            # Database schema
+│   ├── utils/             # R2, AI, and Helpers
+│   └── scripts/           # DB maintenance tools
+```
+
+## 📄 License
+This project is for academic use. All rights reserved.
