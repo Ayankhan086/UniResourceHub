@@ -2,6 +2,7 @@ import { ApiError } from '../utils/ApiError.js';
 import { ApiResponse } from '../utils/ApiResponse.js';
 import { PrismaClient } from '../generated/client/client.js';
 import { uploadToR2 } from '../utils/r2.js';
+import { generateEmbedding, formatEmbeddingForSql } from '../utils/embedding.js';
 
 const prisma = new PrismaClient();
 
@@ -61,11 +62,30 @@ export const createResource = async (req, res) => {
                 name,
                 departmentId: Number(deptId),
                 tags: tags,
-                File: fileUploadResponse?.url, // Assuming the file URL is stored
-                image: imageUploadResponse?.url, // Assuming the image URL is stored
+                File: fileUploadResponse?.url,
+                image: imageUploadResponse?.url,
                 userId: userId
             },
         });
+
+        // Generate and store embedding for semantic search
+        try {
+            // Fetch department name for richer context
+            const dept = await prisma.department.findUnique({
+                where: { id: Number(deptId) },
+                select: { name: true }
+            });
+
+            const embeddingText = `Resource: ${name}. Department: ${dept?.name || ""}. Tags: ${tags.join(", ")}`;
+            const embedding = await generateEmbedding(embeddingText);
+            if (embedding) {
+                const formattedEmbedding = formatEmbeddingForSql(embedding);
+                await prisma.$executeRaw`UPDATE "Resource" SET "embedding" = ${formattedEmbedding}::vector WHERE "id" = ${resource.id}`;
+            }
+        } catch (embeddingError) {
+            console.error("Failed to generate embedding for resource:", embeddingError);
+            // We don't throw here to ensure the resource creation still succeeds
+        }
 
         // console.log('Resource created:', resource);
 
@@ -241,51 +261,85 @@ export const getResourcesBySearch = async (req, res) => {
             throw new ApiError(404, 'Department not found');
         }
 
-        // Build the search filter
+        let semanticResources = [];
+        let keywordResources = [];
+
+        // 1. Semantic Search (Looser threshold for better discovery)
+        if (searchQuery && searchQuery.length > 2) {
+            try {
+                const queryEmbedding = await generateEmbedding(searchQuery);
+                if (queryEmbedding) {
+                    const formattedEmbedding = formatEmbeddingForSql(queryEmbedding);
+                    
+                    semanticResources = await prisma.$queryRaw`
+                        SELECT id, name, "File", image, "publishStatus", "departmentId", "userId", "createdAt", tags, 
+                               ("embedding" <=> ${formattedEmbedding}::vector) as distance
+                        FROM "Resource"
+                        WHERE "departmentId" = ${Number(deptId)}
+                        AND "publishStatus" = 'PUBLISHED'
+                        AND ("embedding" <=> ${formattedEmbedding}::vector) < 0.6
+                        ORDER BY distance ASC
+                        LIMIT 40
+                    `;
+                }
+            } catch (semanticError) {
+                console.error("Semantic search failed:", semanticError);
+            }
+        }
+
+        // 2. Keyword Search (Fallback/Supplement)
         const searchFilter = {
             departmentId: Number(deptId),
-            publishStatus: { in: ["PUBLISHED"] },
+            publishStatus: 'PUBLISHED',
             OR: [
-                {
-                    name: {
-                        contains: searchQuery,
-                        mode: 'insensitive'
-                    }
-                },
-                {
-                    name: {
-                        startsWith: searchQuery,
-                        mode: 'insensitive'
-                    }
-                },
-                {
-                    name: {
-                        endsWith: searchQuery,
-                        mode: 'insensitive'
-                    }
-                },
-                {
-                    tags: {
-                        has: searchQuery
-                    }
-                }
+                { name: { contains: searchQuery, mode: 'insensitive' } },
+                { tags: { has: searchQuery } }
             ]
         };
 
-        // Get total count for pagination
-        const totalResources = await prisma.resource.count({
+        keywordResources = await prisma.resource.findMany({
             where: searchFilter,
+            take: 40
         });
 
-        // Fetch paginated resources
-        const resources = await prisma.resource.findMany({
-            where: searchFilter,
-            skip: (page - 1) * pageSize,
-            take: pageSize,
+        // 3. Combine and Rank
+        const combinedMap = new Map();
+        
+        // Add keyword results first (usually most exact)
+        keywordResources.forEach(res => {
+            combinedMap.set(res.id, { ...res, score: 1.0, searchType: 'keyword' });
         });
 
-        if (!resources || resources.length === 0) {
-            throw new ApiError(401, "No Resource Found.");
+        // Add/Update with semantic results
+        semanticResources.forEach(res => {
+            const existing = combinedMap.get(res.id);
+            const semanticScore = 1 - res.distance; // distance to similarity
+            
+            if (existing) {
+                existing.score += semanticScore; // Boost items found by both
+                existing.searchType = 'hybrid';
+            } else {
+                combinedMap.set(res.id, { ...res, score: semanticScore, searchType: 'semantic' });
+            }
+        });
+
+        let allResources = Array.from(combinedMap.values())
+            .sort((a, b) => b.score - a.score);
+
+        // 4. Pagination
+        const totalResources = allResources.length;
+        const resources = allResources.slice((page - 1) * pageSize, page * pageSize);
+
+        if (resources.length === 0) {
+            // If still nothing, return empty but not 404 to avoid frontend errors
+            return res.status(200).json(
+                new ApiResponse(200, {
+                    resources: [],
+                    page,
+                    totalResources: 0,
+                    totalPages: 0
+                }, 'No resources found')
+            );
         }
 
         return res.status(200).json(
@@ -298,7 +352,7 @@ export const getResourcesBySearch = async (req, res) => {
         );
 
     } catch (error) {
-        console.log(error);
+        console.error('Search error:', error);
         throw new ApiError(500, 'Internal Server Error');
     }
 }

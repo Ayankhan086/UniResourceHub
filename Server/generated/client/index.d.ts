@@ -2763,8 +2763,8 @@ export namespace Prisma {
   export type DepartmentCountAggregateOutputType = {
     id: number
     name: number
-    tags: number
     createdAt: number
+    tags: number
     _all: number
   }
 
@@ -2792,8 +2792,8 @@ export namespace Prisma {
   export type DepartmentCountAggregateInputType = {
     id?: true
     name?: true
-    tags?: true
     createdAt?: true
+    tags?: true
     _all?: true
   }
 
@@ -2886,8 +2886,8 @@ export namespace Prisma {
   export type DepartmentGroupByOutputType = {
     id: number
     name: string
-    tags: string[]
     createdAt: Date
+    tags: string[]
     _count: DepartmentCountAggregateOutputType | null
     _avg: DepartmentAvgAggregateOutputType | null
     _sum: DepartmentSumAggregateOutputType | null
@@ -2912,8 +2912,8 @@ export namespace Prisma {
   export type DepartmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    tags?: boolean
     createdAt?: boolean
+    tags?: boolean
     semesters?: boolean | Department$semestersArgs<ExtArgs>
     resources?: boolean | Department$resourcesArgs<ExtArgs>
     courses?: boolean | Department$coursesArgs<ExtArgs>
@@ -2923,25 +2923,25 @@ export namespace Prisma {
   export type DepartmentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    tags?: boolean
     createdAt?: boolean
+    tags?: boolean
   }, ExtArgs["result"]["department"]>
 
   export type DepartmentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    tags?: boolean
     createdAt?: boolean
+    tags?: boolean
   }, ExtArgs["result"]["department"]>
 
   export type DepartmentSelectScalar = {
     id?: boolean
     name?: boolean
-    tags?: boolean
     createdAt?: boolean
+    tags?: boolean
   }
 
-  export type DepartmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "tags" | "createdAt", ExtArgs["result"]["department"]>
+  export type DepartmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "tags", ExtArgs["result"]["department"]>
   export type DepartmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     semesters?: boolean | Department$semestersArgs<ExtArgs>
     resources?: boolean | Department$resourcesArgs<ExtArgs>
@@ -2961,8 +2961,8 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
-      tags: string[]
       createdAt: Date
+      tags: string[]
     }, ExtArgs["result"]["department"]>
     composites: {}
   }
@@ -3391,8 +3391,8 @@ export namespace Prisma {
   interface DepartmentFieldRefs {
     readonly id: FieldRef<"Department", 'Int'>
     readonly name: FieldRef<"Department", 'String'>
-    readonly tags: FieldRef<"Department", 'String[]'>
     readonly createdAt: FieldRef<"Department", 'DateTime'>
+    readonly tags: FieldRef<"Department", 'String[]'>
   }
     
 
@@ -3885,70 +3885,70 @@ export namespace Prisma {
 
   export type SemesterAvgAggregateOutputType = {
     id: number | null
-    Number: number | null
     departmentId: number | null
+    Number: number | null
   }
 
   export type SemesterSumAggregateOutputType = {
     id: number | null
-    Number: number | null
     departmentId: number | null
+    Number: number | null
   }
 
   export type SemesterMinAggregateOutputType = {
     id: number | null
-    Number: number | null
     departmentId: number | null
     createdAt: Date | null
+    Number: number | null
   }
 
   export type SemesterMaxAggregateOutputType = {
     id: number | null
-    Number: number | null
     departmentId: number | null
     createdAt: Date | null
+    Number: number | null
   }
 
   export type SemesterCountAggregateOutputType = {
     id: number
-    Number: number
     departmentId: number
     createdAt: number
+    Number: number
     _all: number
   }
 
 
   export type SemesterAvgAggregateInputType = {
     id?: true
-    Number?: true
     departmentId?: true
+    Number?: true
   }
 
   export type SemesterSumAggregateInputType = {
     id?: true
-    Number?: true
     departmentId?: true
+    Number?: true
   }
 
   export type SemesterMinAggregateInputType = {
     id?: true
-    Number?: true
     departmentId?: true
     createdAt?: true
+    Number?: true
   }
 
   export type SemesterMaxAggregateInputType = {
     id?: true
-    Number?: true
     departmentId?: true
     createdAt?: true
+    Number?: true
   }
 
   export type SemesterCountAggregateInputType = {
     id?: true
-    Number?: true
     departmentId?: true
     createdAt?: true
+    Number?: true
     _all?: true
   }
 
@@ -4040,9 +4040,9 @@ export namespace Prisma {
 
   export type SemesterGroupByOutputType = {
     id: number
-    Number: number
     departmentId: number
     createdAt: Date
+    Number: number
     _count: SemesterCountAggregateOutputType | null
     _avg: SemesterAvgAggregateOutputType | null
     _sum: SemesterSumAggregateOutputType | null
@@ -4066,9 +4066,9 @@ export namespace Prisma {
 
   export type SemesterSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    Number?: boolean
     departmentId?: boolean
     createdAt?: boolean
+    Number?: boolean
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
     courses?: boolean | Semester$coursesArgs<ExtArgs>
     _count?: boolean | SemesterCountOutputTypeDefaultArgs<ExtArgs>
@@ -4076,28 +4076,28 @@ export namespace Prisma {
 
   export type SemesterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    Number?: boolean
     departmentId?: boolean
     createdAt?: boolean
+    Number?: boolean
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["semester"]>
 
   export type SemesterSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    Number?: boolean
     departmentId?: boolean
     createdAt?: boolean
+    Number?: boolean
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["semester"]>
 
   export type SemesterSelectScalar = {
     id?: boolean
-    Number?: boolean
     departmentId?: boolean
     createdAt?: boolean
+    Number?: boolean
   }
 
-  export type SemesterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "Number" | "departmentId" | "createdAt", ExtArgs["result"]["semester"]>
+  export type SemesterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "departmentId" | "createdAt" | "Number", ExtArgs["result"]["semester"]>
   export type SemesterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
     courses?: boolean | Semester$coursesArgs<ExtArgs>
@@ -4118,9 +4118,9 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      Number: number
       departmentId: number
       createdAt: Date
+      Number: number
     }, ExtArgs["result"]["semester"]>
     composites: {}
   }
@@ -4547,9 +4547,9 @@ export namespace Prisma {
    */
   interface SemesterFieldRefs {
     readonly id: FieldRef<"Semester", 'Int'>
-    readonly Number: FieldRef<"Semester", 'Int'>
     readonly departmentId: FieldRef<"Semester", 'Int'>
     readonly createdAt: FieldRef<"Semester", 'DateTime'>
+    readonly Number: FieldRef<"Semester", 'Int'>
   }
     
 
@@ -5016,24 +5016,24 @@ export namespace Prisma {
     id: number | null
     name: string | null
     semesterId: number | null
-    departmentId: number | null
     createdAt: Date | null
+    departmentId: number | null
   }
 
   export type CourseMaxAggregateOutputType = {
     id: number | null
     name: string | null
     semesterId: number | null
-    departmentId: number | null
     createdAt: Date | null
+    departmentId: number | null
   }
 
   export type CourseCountAggregateOutputType = {
     id: number
     name: number
     semesterId: number
-    departmentId: number
     createdAt: number
+    departmentId: number
     _all: number
   }
 
@@ -5054,24 +5054,24 @@ export namespace Prisma {
     id?: true
     name?: true
     semesterId?: true
-    departmentId?: true
     createdAt?: true
+    departmentId?: true
   }
 
   export type CourseMaxAggregateInputType = {
     id?: true
     name?: true
     semesterId?: true
-    departmentId?: true
     createdAt?: true
+    departmentId?: true
   }
 
   export type CourseCountAggregateInputType = {
     id?: true
     name?: true
     semesterId?: true
-    departmentId?: true
     createdAt?: true
+    departmentId?: true
     _all?: true
   }
 
@@ -5165,8 +5165,8 @@ export namespace Prisma {
     id: number
     name: string
     semesterId: number
-    departmentId: number
     createdAt: Date
+    departmentId: number
     _count: CourseCountAggregateOutputType | null
     _avg: CourseAvgAggregateOutputType | null
     _sum: CourseSumAggregateOutputType | null
@@ -5192,8 +5192,8 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     semesterId?: boolean
-    departmentId?: boolean
     createdAt?: boolean
+    departmentId?: boolean
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
     semester?: boolean | SemesterDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["course"]>
@@ -5202,8 +5202,8 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     semesterId?: boolean
-    departmentId?: boolean
     createdAt?: boolean
+    departmentId?: boolean
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
     semester?: boolean | SemesterDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["course"]>
@@ -5212,8 +5212,8 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     semesterId?: boolean
-    departmentId?: boolean
     createdAt?: boolean
+    departmentId?: boolean
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
     semester?: boolean | SemesterDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["course"]>
@@ -5222,11 +5222,11 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     semesterId?: boolean
-    departmentId?: boolean
     createdAt?: boolean
+    departmentId?: boolean
   }
 
-  export type CourseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "semesterId" | "departmentId" | "createdAt", ExtArgs["result"]["course"]>
+  export type CourseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "semesterId" | "createdAt" | "departmentId", ExtArgs["result"]["course"]>
   export type CourseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
     semester?: boolean | SemesterDefaultArgs<ExtArgs>
@@ -5250,8 +5250,8 @@ export namespace Prisma {
       id: number
       name: string
       semesterId: number
-      departmentId: number
       createdAt: Date
+      departmentId: number
     }, ExtArgs["result"]["course"]>
     composites: {}
   }
@@ -5680,8 +5680,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Course", 'Int'>
     readonly name: FieldRef<"Course", 'String'>
     readonly semesterId: FieldRef<"Course", 'Int'>
-    readonly departmentId: FieldRef<"Course", 'Int'>
     readonly createdAt: FieldRef<"Course", 'DateTime'>
+    readonly departmentId: FieldRef<"Course", 'Int'>
   }
     
 
@@ -6125,10 +6125,10 @@ export namespace Prisma {
     name: string | null
     File: string | null
     image: string | null
+    createdAt: Date | null
     publishStatus: $Enums.PublishStatus | null
     departmentId: number | null
     userId: number | null
-    createdAt: Date | null
   }
 
   export type ResourceMaxAggregateOutputType = {
@@ -6136,10 +6136,10 @@ export namespace Prisma {
     name: string | null
     File: string | null
     image: string | null
+    createdAt: Date | null
     publishStatus: $Enums.PublishStatus | null
     departmentId: number | null
     userId: number | null
-    createdAt: Date | null
   }
 
   export type ResourceCountAggregateOutputType = {
@@ -6147,11 +6147,11 @@ export namespace Prisma {
     name: number
     File: number
     image: number
+    createdAt: number
     publishStatus: number
     departmentId: number
-    userId: number
-    createdAt: number
     tags: number
+    userId: number
     _all: number
   }
 
@@ -6173,10 +6173,10 @@ export namespace Prisma {
     name?: true
     File?: true
     image?: true
+    createdAt?: true
     publishStatus?: true
     departmentId?: true
     userId?: true
-    createdAt?: true
   }
 
   export type ResourceMaxAggregateInputType = {
@@ -6184,10 +6184,10 @@ export namespace Prisma {
     name?: true
     File?: true
     image?: true
+    createdAt?: true
     publishStatus?: true
     departmentId?: true
     userId?: true
-    createdAt?: true
   }
 
   export type ResourceCountAggregateInputType = {
@@ -6195,11 +6195,11 @@ export namespace Prisma {
     name?: true
     File?: true
     image?: true
+    createdAt?: true
     publishStatus?: true
     departmentId?: true
-    userId?: true
-    createdAt?: true
     tags?: true
+    userId?: true
     _all?: true
   }
 
@@ -6294,11 +6294,11 @@ export namespace Prisma {
     name: string
     File: string | null
     image: string | null
+    createdAt: Date
     publishStatus: $Enums.PublishStatus
     departmentId: number
-    userId: number
-    createdAt: Date
     tags: string[]
+    userId: number
     _count: ResourceCountAggregateOutputType | null
     _avg: ResourceAvgAggregateOutputType | null
     _sum: ResourceSumAggregateOutputType | null
@@ -6325,11 +6325,11 @@ export namespace Prisma {
     name?: boolean
     File?: boolean
     image?: boolean
+    createdAt?: boolean
     publishStatus?: boolean
     departmentId?: boolean
-    userId?: boolean
-    createdAt?: boolean
     tags?: boolean
+    userId?: boolean
     userActivities?: boolean | Resource$userActivitiesArgs<ExtArgs>
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -6341,11 +6341,11 @@ export namespace Prisma {
     name?: boolean
     File?: boolean
     image?: boolean
+    createdAt?: boolean
     publishStatus?: boolean
     departmentId?: boolean
-    userId?: boolean
-    createdAt?: boolean
     tags?: boolean
+    userId?: boolean
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["resource"]>
@@ -6355,11 +6355,11 @@ export namespace Prisma {
     name?: boolean
     File?: boolean
     image?: boolean
+    createdAt?: boolean
     publishStatus?: boolean
     departmentId?: boolean
-    userId?: boolean
-    createdAt?: boolean
     tags?: boolean
+    userId?: boolean
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["resource"]>
@@ -6369,14 +6369,14 @@ export namespace Prisma {
     name?: boolean
     File?: boolean
     image?: boolean
+    createdAt?: boolean
     publishStatus?: boolean
     departmentId?: boolean
-    userId?: boolean
-    createdAt?: boolean
     tags?: boolean
+    userId?: boolean
   }
 
-  export type ResourceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "File" | "image" | "publishStatus" | "departmentId" | "userId" | "createdAt" | "tags", ExtArgs["result"]["resource"]>
+  export type ResourceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "File" | "image" | "createdAt" | "publishStatus" | "departmentId" | "tags" | "userId", ExtArgs["result"]["resource"]>
   export type ResourceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     userActivities?: boolean | Resource$userActivitiesArgs<ExtArgs>
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
@@ -6404,11 +6404,11 @@ export namespace Prisma {
       name: string
       File: string | null
       image: string | null
+      createdAt: Date
       publishStatus: $Enums.PublishStatus
       departmentId: number
-      userId: number
-      createdAt: Date
       tags: string[]
+      userId: number
     }, ExtArgs["result"]["resource"]>
     composites: {}
   }
@@ -6839,11 +6839,11 @@ export namespace Prisma {
     readonly name: FieldRef<"Resource", 'String'>
     readonly File: FieldRef<"Resource", 'String'>
     readonly image: FieldRef<"Resource", 'String'>
+    readonly createdAt: FieldRef<"Resource", 'DateTime'>
     readonly publishStatus: FieldRef<"Resource", 'PublishStatus'>
     readonly departmentId: FieldRef<"Resource", 'Int'>
-    readonly userId: FieldRef<"Resource", 'Int'>
-    readonly createdAt: FieldRef<"Resource", 'DateTime'>
     readonly tags: FieldRef<"Resource", 'String[]'>
+    readonly userId: FieldRef<"Resource", 'Int'>
   }
     
 
@@ -9421,8 +9421,8 @@ export namespace Prisma {
   export const DepartmentScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    tags: 'tags',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    tags: 'tags'
   };
 
   export type DepartmentScalarFieldEnum = (typeof DepartmentScalarFieldEnum)[keyof typeof DepartmentScalarFieldEnum]
@@ -9430,9 +9430,9 @@ export namespace Prisma {
 
   export const SemesterScalarFieldEnum: {
     id: 'id',
-    Number: 'Number',
     departmentId: 'departmentId',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    Number: 'Number'
   };
 
   export type SemesterScalarFieldEnum = (typeof SemesterScalarFieldEnum)[keyof typeof SemesterScalarFieldEnum]
@@ -9442,8 +9442,8 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     semesterId: 'semesterId',
-    departmentId: 'departmentId',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    departmentId: 'departmentId'
   };
 
   export type CourseScalarFieldEnum = (typeof CourseScalarFieldEnum)[keyof typeof CourseScalarFieldEnum]
@@ -9454,11 +9454,11 @@ export namespace Prisma {
     name: 'name',
     File: 'File',
     image: 'image',
+    createdAt: 'createdAt',
     publishStatus: 'publishStatus',
     departmentId: 'departmentId',
-    userId: 'userId',
-    createdAt: 'createdAt',
-    tags: 'tags'
+    tags: 'tags',
+    userId: 'userId'
   };
 
   export type ResourceScalarFieldEnum = (typeof ResourceScalarFieldEnum)[keyof typeof ResourceScalarFieldEnum]
@@ -9666,8 +9666,8 @@ export namespace Prisma {
     NOT?: DepartmentWhereInput | DepartmentWhereInput[]
     id?: IntFilter<"Department"> | number
     name?: StringFilter<"Department"> | string
-    tags?: StringNullableListFilter<"Department">
     createdAt?: DateTimeFilter<"Department"> | Date | string
+    tags?: StringNullableListFilter<"Department">
     semesters?: SemesterListRelationFilter
     resources?: ResourceListRelationFilter
     courses?: CourseListRelationFilter
@@ -9676,8 +9676,8 @@ export namespace Prisma {
   export type DepartmentOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    tags?: SortOrder
     createdAt?: SortOrder
+    tags?: SortOrder
     semesters?: SemesterOrderByRelationAggregateInput
     resources?: ResourceOrderByRelationAggregateInput
     courses?: CourseOrderByRelationAggregateInput
@@ -9689,8 +9689,8 @@ export namespace Prisma {
     AND?: DepartmentWhereInput | DepartmentWhereInput[]
     OR?: DepartmentWhereInput[]
     NOT?: DepartmentWhereInput | DepartmentWhereInput[]
-    tags?: StringNullableListFilter<"Department">
     createdAt?: DateTimeFilter<"Department"> | Date | string
+    tags?: StringNullableListFilter<"Department">
     semesters?: SemesterListRelationFilter
     resources?: ResourceListRelationFilter
     courses?: CourseListRelationFilter
@@ -9699,8 +9699,8 @@ export namespace Prisma {
   export type DepartmentOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    tags?: SortOrder
     createdAt?: SortOrder
+    tags?: SortOrder
     _count?: DepartmentCountOrderByAggregateInput
     _avg?: DepartmentAvgOrderByAggregateInput
     _max?: DepartmentMaxOrderByAggregateInput
@@ -9714,8 +9714,8 @@ export namespace Prisma {
     NOT?: DepartmentScalarWhereWithAggregatesInput | DepartmentScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Department"> | number
     name?: StringWithAggregatesFilter<"Department"> | string
-    tags?: StringNullableListFilter<"Department">
     createdAt?: DateTimeWithAggregatesFilter<"Department"> | Date | string
+    tags?: StringNullableListFilter<"Department">
   }
 
   export type SemesterWhereInput = {
@@ -9723,18 +9723,18 @@ export namespace Prisma {
     OR?: SemesterWhereInput[]
     NOT?: SemesterWhereInput | SemesterWhereInput[]
     id?: IntFilter<"Semester"> | number
-    Number?: IntFilter<"Semester"> | number
     departmentId?: IntFilter<"Semester"> | number
     createdAt?: DateTimeFilter<"Semester"> | Date | string
+    Number?: IntFilter<"Semester"> | number
     department?: XOR<DepartmentScalarRelationFilter, DepartmentWhereInput>
     courses?: CourseListRelationFilter
   }
 
   export type SemesterOrderByWithRelationInput = {
     id?: SortOrder
-    Number?: SortOrder
     departmentId?: SortOrder
     createdAt?: SortOrder
+    Number?: SortOrder
     department?: DepartmentOrderByWithRelationInput
     courses?: CourseOrderByRelationAggregateInput
   }
@@ -9744,18 +9744,18 @@ export namespace Prisma {
     AND?: SemesterWhereInput | SemesterWhereInput[]
     OR?: SemesterWhereInput[]
     NOT?: SemesterWhereInput | SemesterWhereInput[]
-    Number?: IntFilter<"Semester"> | number
     departmentId?: IntFilter<"Semester"> | number
     createdAt?: DateTimeFilter<"Semester"> | Date | string
+    Number?: IntFilter<"Semester"> | number
     department?: XOR<DepartmentScalarRelationFilter, DepartmentWhereInput>
     courses?: CourseListRelationFilter
   }, "id">
 
   export type SemesterOrderByWithAggregationInput = {
     id?: SortOrder
-    Number?: SortOrder
     departmentId?: SortOrder
     createdAt?: SortOrder
+    Number?: SortOrder
     _count?: SemesterCountOrderByAggregateInput
     _avg?: SemesterAvgOrderByAggregateInput
     _max?: SemesterMaxOrderByAggregateInput
@@ -9768,9 +9768,9 @@ export namespace Prisma {
     OR?: SemesterScalarWhereWithAggregatesInput[]
     NOT?: SemesterScalarWhereWithAggregatesInput | SemesterScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Semester"> | number
-    Number?: IntWithAggregatesFilter<"Semester"> | number
     departmentId?: IntWithAggregatesFilter<"Semester"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Semester"> | Date | string
+    Number?: IntWithAggregatesFilter<"Semester"> | number
   }
 
   export type CourseWhereInput = {
@@ -9780,8 +9780,8 @@ export namespace Prisma {
     id?: IntFilter<"Course"> | number
     name?: StringFilter<"Course"> | string
     semesterId?: IntFilter<"Course"> | number
-    departmentId?: IntFilter<"Course"> | number
     createdAt?: DateTimeFilter<"Course"> | Date | string
+    departmentId?: IntFilter<"Course"> | number
     department?: XOR<DepartmentScalarRelationFilter, DepartmentWhereInput>
     semester?: XOR<SemesterScalarRelationFilter, SemesterWhereInput>
   }
@@ -9790,8 +9790,8 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     semesterId?: SortOrder
-    departmentId?: SortOrder
     createdAt?: SortOrder
+    departmentId?: SortOrder
     department?: DepartmentOrderByWithRelationInput
     semester?: SemesterOrderByWithRelationInput
   }
@@ -9803,8 +9803,8 @@ export namespace Prisma {
     NOT?: CourseWhereInput | CourseWhereInput[]
     name?: StringFilter<"Course"> | string
     semesterId?: IntFilter<"Course"> | number
-    departmentId?: IntFilter<"Course"> | number
     createdAt?: DateTimeFilter<"Course"> | Date | string
+    departmentId?: IntFilter<"Course"> | number
     department?: XOR<DepartmentScalarRelationFilter, DepartmentWhereInput>
     semester?: XOR<SemesterScalarRelationFilter, SemesterWhereInput>
   }, "id">
@@ -9813,8 +9813,8 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     semesterId?: SortOrder
-    departmentId?: SortOrder
     createdAt?: SortOrder
+    departmentId?: SortOrder
     _count?: CourseCountOrderByAggregateInput
     _avg?: CourseAvgOrderByAggregateInput
     _max?: CourseMaxOrderByAggregateInput
@@ -9829,8 +9829,8 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Course"> | number
     name?: StringWithAggregatesFilter<"Course"> | string
     semesterId?: IntWithAggregatesFilter<"Course"> | number
-    departmentId?: IntWithAggregatesFilter<"Course"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Course"> | Date | string
+    departmentId?: IntWithAggregatesFilter<"Course"> | number
   }
 
   export type ResourceWhereInput = {
@@ -9841,11 +9841,11 @@ export namespace Prisma {
     name?: StringFilter<"Resource"> | string
     File?: StringNullableFilter<"Resource"> | string | null
     image?: StringNullableFilter<"Resource"> | string | null
+    createdAt?: DateTimeFilter<"Resource"> | Date | string
     publishStatus?: EnumPublishStatusFilter<"Resource"> | $Enums.PublishStatus
     departmentId?: IntFilter<"Resource"> | number
-    userId?: IntFilter<"Resource"> | number
-    createdAt?: DateTimeFilter<"Resource"> | Date | string
     tags?: StringNullableListFilter<"Resource">
+    userId?: IntFilter<"Resource"> | number
     userActivities?: UserActivityListRelationFilter
     department?: XOR<DepartmentScalarRelationFilter, DepartmentWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -9856,11 +9856,11 @@ export namespace Prisma {
     name?: SortOrder
     File?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
     publishStatus?: SortOrder
     departmentId?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
     tags?: SortOrder
+    userId?: SortOrder
     userActivities?: userActivityOrderByRelationAggregateInput
     department?: DepartmentOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
@@ -9874,11 +9874,11 @@ export namespace Prisma {
     name?: StringFilter<"Resource"> | string
     File?: StringNullableFilter<"Resource"> | string | null
     image?: StringNullableFilter<"Resource"> | string | null
+    createdAt?: DateTimeFilter<"Resource"> | Date | string
     publishStatus?: EnumPublishStatusFilter<"Resource"> | $Enums.PublishStatus
     departmentId?: IntFilter<"Resource"> | number
-    userId?: IntFilter<"Resource"> | number
-    createdAt?: DateTimeFilter<"Resource"> | Date | string
     tags?: StringNullableListFilter<"Resource">
+    userId?: IntFilter<"Resource"> | number
     userActivities?: UserActivityListRelationFilter
     department?: XOR<DepartmentScalarRelationFilter, DepartmentWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -9889,11 +9889,11 @@ export namespace Prisma {
     name?: SortOrder
     File?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
     publishStatus?: SortOrder
     departmentId?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
     tags?: SortOrder
+    userId?: SortOrder
     _count?: ResourceCountOrderByAggregateInput
     _avg?: ResourceAvgOrderByAggregateInput
     _max?: ResourceMaxOrderByAggregateInput
@@ -9909,11 +9909,11 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Resource"> | string
     File?: StringNullableWithAggregatesFilter<"Resource"> | string | null
     image?: StringNullableWithAggregatesFilter<"Resource"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Resource"> | Date | string
     publishStatus?: EnumPublishStatusWithAggregatesFilter<"Resource"> | $Enums.PublishStatus
     departmentId?: IntWithAggregatesFilter<"Resource"> | number
-    userId?: IntWithAggregatesFilter<"Resource"> | number
-    createdAt?: DateTimeWithAggregatesFilter<"Resource"> | Date | string
     tags?: StringNullableListFilter<"Resource">
+    userId?: IntWithAggregatesFilter<"Resource"> | number
   }
 
   export type BlackListedTokenWhereInput = {
@@ -10083,8 +10083,8 @@ export namespace Prisma {
 
   export type DepartmentCreateInput = {
     name: string
-    tags?: DepartmentCreatetagsInput | string[]
     createdAt?: Date | string
+    tags?: DepartmentCreatetagsInput | string[]
     semesters?: SemesterCreateNestedManyWithoutDepartmentInput
     resources?: ResourceCreateNestedManyWithoutDepartmentInput
     courses?: CourseCreateNestedManyWithoutDepartmentInput
@@ -10093,8 +10093,8 @@ export namespace Prisma {
   export type DepartmentUncheckedCreateInput = {
     id?: number
     name: string
-    tags?: DepartmentCreatetagsInput | string[]
     createdAt?: Date | string
+    tags?: DepartmentCreatetagsInput | string[]
     semesters?: SemesterUncheckedCreateNestedManyWithoutDepartmentInput
     resources?: ResourceUncheckedCreateNestedManyWithoutDepartmentInput
     courses?: CourseUncheckedCreateNestedManyWithoutDepartmentInput
@@ -10102,8 +10102,8 @@ export namespace Prisma {
 
   export type DepartmentUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
-    tags?: DepartmentUpdatetagsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: DepartmentUpdatetagsInput | string[]
     semesters?: SemesterUpdateManyWithoutDepartmentNestedInput
     resources?: ResourceUpdateManyWithoutDepartmentNestedInput
     courses?: CourseUpdateManyWithoutDepartmentNestedInput
@@ -10112,8 +10112,8 @@ export namespace Prisma {
   export type DepartmentUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    tags?: DepartmentUpdatetagsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: DepartmentUpdatetagsInput | string[]
     semesters?: SemesterUncheckedUpdateManyWithoutDepartmentNestedInput
     resources?: ResourceUncheckedUpdateManyWithoutDepartmentNestedInput
     courses?: CourseUncheckedUpdateManyWithoutDepartmentNestedInput
@@ -10122,70 +10122,70 @@ export namespace Prisma {
   export type DepartmentCreateManyInput = {
     id?: number
     name: string
-    tags?: DepartmentCreatetagsInput | string[]
     createdAt?: Date | string
+    tags?: DepartmentCreatetagsInput | string[]
   }
 
   export type DepartmentUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
-    tags?: DepartmentUpdatetagsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: DepartmentUpdatetagsInput | string[]
   }
 
   export type DepartmentUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    tags?: DepartmentUpdatetagsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: DepartmentUpdatetagsInput | string[]
   }
 
   export type SemesterCreateInput = {
-    Number: number
     createdAt?: Date | string
+    Number: number
     department: DepartmentCreateNestedOneWithoutSemestersInput
     courses?: CourseCreateNestedManyWithoutSemesterInput
   }
 
   export type SemesterUncheckedCreateInput = {
     id?: number
-    Number: number
     departmentId: number
     createdAt?: Date | string
+    Number: number
     courses?: CourseUncheckedCreateNestedManyWithoutSemesterInput
   }
 
   export type SemesterUpdateInput = {
-    Number?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Number?: IntFieldUpdateOperationsInput | number
     department?: DepartmentUpdateOneRequiredWithoutSemestersNestedInput
     courses?: CourseUpdateManyWithoutSemesterNestedInput
   }
 
   export type SemesterUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    Number?: IntFieldUpdateOperationsInput | number
     departmentId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Number?: IntFieldUpdateOperationsInput | number
     courses?: CourseUncheckedUpdateManyWithoutSemesterNestedInput
   }
 
   export type SemesterCreateManyInput = {
     id?: number
-    Number: number
     departmentId: number
     createdAt?: Date | string
+    Number: number
   }
 
   export type SemesterUpdateManyMutationInput = {
-    Number?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Number?: IntFieldUpdateOperationsInput | number
   }
 
   export type SemesterUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    Number?: IntFieldUpdateOperationsInput | number
     departmentId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Number?: IntFieldUpdateOperationsInput | number
   }
 
   export type CourseCreateInput = {
@@ -10199,8 +10199,8 @@ export namespace Prisma {
     id?: number
     name: string
     semesterId: number
-    departmentId: number
     createdAt?: Date | string
+    departmentId: number
   }
 
   export type CourseUpdateInput = {
@@ -10214,16 +10214,16 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     semesterId?: IntFieldUpdateOperationsInput | number
-    departmentId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    departmentId?: IntFieldUpdateOperationsInput | number
   }
 
   export type CourseCreateManyInput = {
     id?: number
     name: string
     semesterId: number
-    departmentId: number
     createdAt?: Date | string
+    departmentId: number
   }
 
   export type CourseUpdateManyMutationInput = {
@@ -10235,16 +10235,16 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     semesterId?: IntFieldUpdateOperationsInput | number
-    departmentId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    departmentId?: IntFieldUpdateOperationsInput | number
   }
 
   export type ResourceCreateInput = {
     name: string
     File?: string | null
     image?: string | null
-    publishStatus?: $Enums.PublishStatus
     createdAt?: Date | string
+    publishStatus?: $Enums.PublishStatus
     tags?: ResourceCreatetagsInput | string[]
     userActivities?: userActivityCreateNestedManyWithoutResourceInput
     department: DepartmentCreateNestedOneWithoutResourcesInput
@@ -10256,11 +10256,11 @@ export namespace Prisma {
     name: string
     File?: string | null
     image?: string | null
+    createdAt?: Date | string
     publishStatus?: $Enums.PublishStatus
     departmentId: number
-    userId: number
-    createdAt?: Date | string
     tags?: ResourceCreatetagsInput | string[]
+    userId: number
     userActivities?: userActivityUncheckedCreateNestedManyWithoutResourceInput
   }
 
@@ -10268,8 +10268,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     File?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    publishStatus?: EnumPublishStatusFieldUpdateOperationsInput | $Enums.PublishStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishStatus?: EnumPublishStatusFieldUpdateOperationsInput | $Enums.PublishStatus
     tags?: ResourceUpdatetagsInput | string[]
     userActivities?: userActivityUpdateManyWithoutResourceNestedInput
     department?: DepartmentUpdateOneRequiredWithoutResourcesNestedInput
@@ -10281,11 +10281,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     File?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     publishStatus?: EnumPublishStatusFieldUpdateOperationsInput | $Enums.PublishStatus
     departmentId?: IntFieldUpdateOperationsInput | number
-    userId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: ResourceUpdatetagsInput | string[]
+    userId?: IntFieldUpdateOperationsInput | number
     userActivities?: userActivityUncheckedUpdateManyWithoutResourceNestedInput
   }
 
@@ -10294,19 +10294,19 @@ export namespace Prisma {
     name: string
     File?: string | null
     image?: string | null
+    createdAt?: Date | string
     publishStatus?: $Enums.PublishStatus
     departmentId: number
-    userId: number
-    createdAt?: Date | string
     tags?: ResourceCreatetagsInput | string[]
+    userId: number
   }
 
   export type ResourceUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     File?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    publishStatus?: EnumPublishStatusFieldUpdateOperationsInput | $Enums.PublishStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishStatus?: EnumPublishStatusFieldUpdateOperationsInput | $Enums.PublishStatus
     tags?: ResourceUpdatetagsInput | string[]
   }
 
@@ -10315,11 +10315,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     File?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     publishStatus?: EnumPublishStatusFieldUpdateOperationsInput | $Enums.PublishStatus
     departmentId?: IntFieldUpdateOperationsInput | number
-    userId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: ResourceUpdatetagsInput | string[]
+    userId?: IntFieldUpdateOperationsInput | number
   }
 
   export type BlackListedTokenCreateInput = {
@@ -10580,8 +10580,8 @@ export namespace Prisma {
   export type DepartmentCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    tags?: SortOrder
     createdAt?: SortOrder
+    tags?: SortOrder
   }
 
   export type DepartmentAvgOrderByAggregateInput = {
@@ -10611,35 +10611,35 @@ export namespace Prisma {
 
   export type SemesterCountOrderByAggregateInput = {
     id?: SortOrder
-    Number?: SortOrder
     departmentId?: SortOrder
     createdAt?: SortOrder
+    Number?: SortOrder
   }
 
   export type SemesterAvgOrderByAggregateInput = {
     id?: SortOrder
-    Number?: SortOrder
     departmentId?: SortOrder
+    Number?: SortOrder
   }
 
   export type SemesterMaxOrderByAggregateInput = {
     id?: SortOrder
-    Number?: SortOrder
     departmentId?: SortOrder
     createdAt?: SortOrder
+    Number?: SortOrder
   }
 
   export type SemesterMinOrderByAggregateInput = {
     id?: SortOrder
-    Number?: SortOrder
     departmentId?: SortOrder
     createdAt?: SortOrder
+    Number?: SortOrder
   }
 
   export type SemesterSumOrderByAggregateInput = {
     id?: SortOrder
-    Number?: SortOrder
     departmentId?: SortOrder
+    Number?: SortOrder
   }
 
   export type SemesterScalarRelationFilter = {
@@ -10651,8 +10651,8 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     semesterId?: SortOrder
-    departmentId?: SortOrder
     createdAt?: SortOrder
+    departmentId?: SortOrder
   }
 
   export type CourseAvgOrderByAggregateInput = {
@@ -10665,16 +10665,16 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     semesterId?: SortOrder
-    departmentId?: SortOrder
     createdAt?: SortOrder
+    departmentId?: SortOrder
   }
 
   export type CourseMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     semesterId?: SortOrder
-    departmentId?: SortOrder
     createdAt?: SortOrder
+    departmentId?: SortOrder
   }
 
   export type CourseSumOrderByAggregateInput = {
@@ -10720,11 +10720,11 @@ export namespace Prisma {
     name?: SortOrder
     File?: SortOrder
     image?: SortOrder
+    createdAt?: SortOrder
     publishStatus?: SortOrder
     departmentId?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
     tags?: SortOrder
+    userId?: SortOrder
   }
 
   export type ResourceAvgOrderByAggregateInput = {
@@ -10738,10 +10738,10 @@ export namespace Prisma {
     name?: SortOrder
     File?: SortOrder
     image?: SortOrder
+    createdAt?: SortOrder
     publishStatus?: SortOrder
     departmentId?: SortOrder
     userId?: SortOrder
-    createdAt?: SortOrder
   }
 
   export type ResourceMinOrderByAggregateInput = {
@@ -10749,10 +10749,10 @@ export namespace Prisma {
     name?: SortOrder
     File?: SortOrder
     image?: SortOrder
+    createdAt?: SortOrder
     publishStatus?: SortOrder
     departmentId?: SortOrder
     userId?: SortOrder
-    createdAt?: SortOrder
   }
 
   export type ResourceSumOrderByAggregateInput = {
@@ -11508,8 +11508,8 @@ export namespace Prisma {
     name: string
     File?: string | null
     image?: string | null
-    publishStatus?: $Enums.PublishStatus
     createdAt?: Date | string
+    publishStatus?: $Enums.PublishStatus
     tags?: ResourceCreatetagsInput | string[]
     userActivities?: userActivityCreateNestedManyWithoutResourceInput
     department: DepartmentCreateNestedOneWithoutResourcesInput
@@ -11520,9 +11520,9 @@ export namespace Prisma {
     name: string
     File?: string | null
     image?: string | null
+    createdAt?: Date | string
     publishStatus?: $Enums.PublishStatus
     departmentId: number
-    createdAt?: Date | string
     tags?: ResourceCreatetagsInput | string[]
     userActivities?: userActivityUncheckedCreateNestedManyWithoutResourceInput
   }
@@ -11588,23 +11588,23 @@ export namespace Prisma {
     name?: StringFilter<"Resource"> | string
     File?: StringNullableFilter<"Resource"> | string | null
     image?: StringNullableFilter<"Resource"> | string | null
+    createdAt?: DateTimeFilter<"Resource"> | Date | string
     publishStatus?: EnumPublishStatusFilter<"Resource"> | $Enums.PublishStatus
     departmentId?: IntFilter<"Resource"> | number
-    userId?: IntFilter<"Resource"> | number
-    createdAt?: DateTimeFilter<"Resource"> | Date | string
     tags?: StringNullableListFilter<"Resource">
+    userId?: IntFilter<"Resource"> | number
   }
 
   export type SemesterCreateWithoutDepartmentInput = {
-    Number: number
     createdAt?: Date | string
+    Number: number
     courses?: CourseCreateNestedManyWithoutSemesterInput
   }
 
   export type SemesterUncheckedCreateWithoutDepartmentInput = {
     id?: number
-    Number: number
     createdAt?: Date | string
+    Number: number
     courses?: CourseUncheckedCreateNestedManyWithoutSemesterInput
   }
 
@@ -11622,8 +11622,8 @@ export namespace Prisma {
     name: string
     File?: string | null
     image?: string | null
-    publishStatus?: $Enums.PublishStatus
     createdAt?: Date | string
+    publishStatus?: $Enums.PublishStatus
     tags?: ResourceCreatetagsInput | string[]
     userActivities?: userActivityCreateNestedManyWithoutResourceInput
     user: UserCreateNestedOneWithoutResourceInput
@@ -11634,10 +11634,10 @@ export namespace Prisma {
     name: string
     File?: string | null
     image?: string | null
-    publishStatus?: $Enums.PublishStatus
-    userId: number
     createdAt?: Date | string
+    publishStatus?: $Enums.PublishStatus
     tags?: ResourceCreatetagsInput | string[]
+    userId: number
     userActivities?: userActivityUncheckedCreateNestedManyWithoutResourceInput
   }
 
@@ -11695,9 +11695,9 @@ export namespace Prisma {
     OR?: SemesterScalarWhereInput[]
     NOT?: SemesterScalarWhereInput | SemesterScalarWhereInput[]
     id?: IntFilter<"Semester"> | number
-    Number?: IntFilter<"Semester"> | number
     departmentId?: IntFilter<"Semester"> | number
     createdAt?: DateTimeFilter<"Semester"> | Date | string
+    Number?: IntFilter<"Semester"> | number
   }
 
   export type ResourceUpsertWithWhereUniqueWithoutDepartmentInput = {
@@ -11739,14 +11739,14 @@ export namespace Prisma {
     id?: IntFilter<"Course"> | number
     name?: StringFilter<"Course"> | string
     semesterId?: IntFilter<"Course"> | number
-    departmentId?: IntFilter<"Course"> | number
     createdAt?: DateTimeFilter<"Course"> | Date | string
+    departmentId?: IntFilter<"Course"> | number
   }
 
   export type DepartmentCreateWithoutSemestersInput = {
     name: string
-    tags?: DepartmentCreatetagsInput | string[]
     createdAt?: Date | string
+    tags?: DepartmentCreatetagsInput | string[]
     resources?: ResourceCreateNestedManyWithoutDepartmentInput
     courses?: CourseCreateNestedManyWithoutDepartmentInput
   }
@@ -11754,8 +11754,8 @@ export namespace Prisma {
   export type DepartmentUncheckedCreateWithoutSemestersInput = {
     id?: number
     name: string
-    tags?: DepartmentCreatetagsInput | string[]
     createdAt?: Date | string
+    tags?: DepartmentCreatetagsInput | string[]
     resources?: ResourceUncheckedCreateNestedManyWithoutDepartmentInput
     courses?: CourseUncheckedCreateNestedManyWithoutDepartmentInput
   }
@@ -11774,8 +11774,8 @@ export namespace Prisma {
   export type CourseUncheckedCreateWithoutSemesterInput = {
     id?: number
     name: string
-    departmentId: number
     createdAt?: Date | string
+    departmentId: number
   }
 
   export type CourseCreateOrConnectWithoutSemesterInput = {
@@ -11801,8 +11801,8 @@ export namespace Prisma {
 
   export type DepartmentUpdateWithoutSemestersInput = {
     name?: StringFieldUpdateOperationsInput | string
-    tags?: DepartmentUpdatetagsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: DepartmentUpdatetagsInput | string[]
     resources?: ResourceUpdateManyWithoutDepartmentNestedInput
     courses?: CourseUpdateManyWithoutDepartmentNestedInput
   }
@@ -11810,8 +11810,8 @@ export namespace Prisma {
   export type DepartmentUncheckedUpdateWithoutSemestersInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    tags?: DepartmentUpdatetagsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: DepartmentUpdatetagsInput | string[]
     resources?: ResourceUncheckedUpdateManyWithoutDepartmentNestedInput
     courses?: CourseUncheckedUpdateManyWithoutDepartmentNestedInput
   }
@@ -11834,8 +11834,8 @@ export namespace Prisma {
 
   export type DepartmentCreateWithoutCoursesInput = {
     name: string
-    tags?: DepartmentCreatetagsInput | string[]
     createdAt?: Date | string
+    tags?: DepartmentCreatetagsInput | string[]
     semesters?: SemesterCreateNestedManyWithoutDepartmentInput
     resources?: ResourceCreateNestedManyWithoutDepartmentInput
   }
@@ -11843,8 +11843,8 @@ export namespace Prisma {
   export type DepartmentUncheckedCreateWithoutCoursesInput = {
     id?: number
     name: string
-    tags?: DepartmentCreatetagsInput | string[]
     createdAt?: Date | string
+    tags?: DepartmentCreatetagsInput | string[]
     semesters?: SemesterUncheckedCreateNestedManyWithoutDepartmentInput
     resources?: ResourceUncheckedCreateNestedManyWithoutDepartmentInput
   }
@@ -11855,16 +11855,16 @@ export namespace Prisma {
   }
 
   export type SemesterCreateWithoutCoursesInput = {
-    Number: number
     createdAt?: Date | string
+    Number: number
     department: DepartmentCreateNestedOneWithoutSemestersInput
   }
 
   export type SemesterUncheckedCreateWithoutCoursesInput = {
     id?: number
-    Number: number
     departmentId: number
     createdAt?: Date | string
+    Number: number
   }
 
   export type SemesterCreateOrConnectWithoutCoursesInput = {
@@ -11885,8 +11885,8 @@ export namespace Prisma {
 
   export type DepartmentUpdateWithoutCoursesInput = {
     name?: StringFieldUpdateOperationsInput | string
-    tags?: DepartmentUpdatetagsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: DepartmentUpdatetagsInput | string[]
     semesters?: SemesterUpdateManyWithoutDepartmentNestedInput
     resources?: ResourceUpdateManyWithoutDepartmentNestedInput
   }
@@ -11894,8 +11894,8 @@ export namespace Prisma {
   export type DepartmentUncheckedUpdateWithoutCoursesInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    tags?: DepartmentUpdatetagsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: DepartmentUpdatetagsInput | string[]
     semesters?: SemesterUncheckedUpdateManyWithoutDepartmentNestedInput
     resources?: ResourceUncheckedUpdateManyWithoutDepartmentNestedInput
   }
@@ -11912,16 +11912,16 @@ export namespace Prisma {
   }
 
   export type SemesterUpdateWithoutCoursesInput = {
-    Number?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Number?: IntFieldUpdateOperationsInput | number
     department?: DepartmentUpdateOneRequiredWithoutSemestersNestedInput
   }
 
   export type SemesterUncheckedUpdateWithoutCoursesInput = {
     id?: IntFieldUpdateOperationsInput | number
-    Number?: IntFieldUpdateOperationsInput | number
     departmentId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Number?: IntFieldUpdateOperationsInput | number
   }
 
   export type userActivityCreateWithoutResourceInput = {
@@ -11949,8 +11949,8 @@ export namespace Prisma {
 
   export type DepartmentCreateWithoutResourcesInput = {
     name: string
-    tags?: DepartmentCreatetagsInput | string[]
     createdAt?: Date | string
+    tags?: DepartmentCreatetagsInput | string[]
     semesters?: SemesterCreateNestedManyWithoutDepartmentInput
     courses?: CourseCreateNestedManyWithoutDepartmentInput
   }
@@ -11958,8 +11958,8 @@ export namespace Prisma {
   export type DepartmentUncheckedCreateWithoutResourcesInput = {
     id?: number
     name: string
-    tags?: DepartmentCreatetagsInput | string[]
     createdAt?: Date | string
+    tags?: DepartmentCreatetagsInput | string[]
     semesters?: SemesterUncheckedCreateNestedManyWithoutDepartmentInput
     courses?: CourseUncheckedCreateNestedManyWithoutDepartmentInput
   }
@@ -12020,8 +12020,8 @@ export namespace Prisma {
 
   export type DepartmentUpdateWithoutResourcesInput = {
     name?: StringFieldUpdateOperationsInput | string
-    tags?: DepartmentUpdatetagsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: DepartmentUpdatetagsInput | string[]
     semesters?: SemesterUpdateManyWithoutDepartmentNestedInput
     courses?: CourseUpdateManyWithoutDepartmentNestedInput
   }
@@ -12029,8 +12029,8 @@ export namespace Prisma {
   export type DepartmentUncheckedUpdateWithoutResourcesInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    tags?: DepartmentUpdatetagsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: DepartmentUpdatetagsInput | string[]
     semesters?: SemesterUncheckedUpdateManyWithoutDepartmentNestedInput
     courses?: CourseUncheckedUpdateManyWithoutDepartmentNestedInput
   }
@@ -12089,8 +12089,8 @@ export namespace Prisma {
     name: string
     File?: string | null
     image?: string | null
-    publishStatus?: $Enums.PublishStatus
     createdAt?: Date | string
+    publishStatus?: $Enums.PublishStatus
     tags?: ResourceCreatetagsInput | string[]
     department: DepartmentCreateNestedOneWithoutResourcesInput
     user: UserCreateNestedOneWithoutResourceInput
@@ -12101,11 +12101,11 @@ export namespace Prisma {
     name: string
     File?: string | null
     image?: string | null
+    createdAt?: Date | string
     publishStatus?: $Enums.PublishStatus
     departmentId: number
-    userId: number
-    createdAt?: Date | string
     tags?: ResourceCreatetagsInput | string[]
+    userId: number
   }
 
   export type ResourceCreateOrConnectWithoutUserActivitiesInput = {
@@ -12156,8 +12156,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     File?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    publishStatus?: EnumPublishStatusFieldUpdateOperationsInput | $Enums.PublishStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishStatus?: EnumPublishStatusFieldUpdateOperationsInput | $Enums.PublishStatus
     tags?: ResourceUpdatetagsInput | string[]
     department?: DepartmentUpdateOneRequiredWithoutResourcesNestedInput
     user?: UserUpdateOneRequiredWithoutResourceNestedInput
@@ -12168,11 +12168,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     File?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     publishStatus?: EnumPublishStatusFieldUpdateOperationsInput | $Enums.PublishStatus
     departmentId?: IntFieldUpdateOperationsInput | number
-    userId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: ResourceUpdatetagsInput | string[]
+    userId?: IntFieldUpdateOperationsInput | number
   }
 
   export type userActivityCreateManyUserInput = {
@@ -12187,9 +12187,9 @@ export namespace Prisma {
     name: string
     File?: string | null
     image?: string | null
+    createdAt?: Date | string
     publishStatus?: $Enums.PublishStatus
     departmentId: number
-    createdAt?: Date | string
     tags?: ResourceCreatetagsInput | string[]
   }
 
@@ -12217,8 +12217,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     File?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    publishStatus?: EnumPublishStatusFieldUpdateOperationsInput | $Enums.PublishStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishStatus?: EnumPublishStatusFieldUpdateOperationsInput | $Enums.PublishStatus
     tags?: ResourceUpdatetagsInput | string[]
     userActivities?: userActivityUpdateManyWithoutResourceNestedInput
     department?: DepartmentUpdateOneRequiredWithoutResourcesNestedInput
@@ -12229,9 +12229,9 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     File?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     publishStatus?: EnumPublishStatusFieldUpdateOperationsInput | $Enums.PublishStatus
     departmentId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: ResourceUpdatetagsInput | string[]
     userActivities?: userActivityUncheckedUpdateManyWithoutResourceNestedInput
   }
@@ -12241,16 +12241,16 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     File?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     publishStatus?: EnumPublishStatusFieldUpdateOperationsInput | $Enums.PublishStatus
     departmentId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: ResourceUpdatetagsInput | string[]
   }
 
   export type SemesterCreateManyDepartmentInput = {
     id?: number
-    Number: number
     createdAt?: Date | string
+    Number: number
   }
 
   export type ResourceCreateManyDepartmentInput = {
@@ -12258,10 +12258,10 @@ export namespace Prisma {
     name: string
     File?: string | null
     image?: string | null
-    publishStatus?: $Enums.PublishStatus
-    userId: number
     createdAt?: Date | string
+    publishStatus?: $Enums.PublishStatus
     tags?: ResourceCreatetagsInput | string[]
+    userId: number
   }
 
   export type CourseCreateManyDepartmentInput = {
@@ -12272,30 +12272,30 @@ export namespace Prisma {
   }
 
   export type SemesterUpdateWithoutDepartmentInput = {
-    Number?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Number?: IntFieldUpdateOperationsInput | number
     courses?: CourseUpdateManyWithoutSemesterNestedInput
   }
 
   export type SemesterUncheckedUpdateWithoutDepartmentInput = {
     id?: IntFieldUpdateOperationsInput | number
-    Number?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Number?: IntFieldUpdateOperationsInput | number
     courses?: CourseUncheckedUpdateManyWithoutSemesterNestedInput
   }
 
   export type SemesterUncheckedUpdateManyWithoutDepartmentInput = {
     id?: IntFieldUpdateOperationsInput | number
-    Number?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Number?: IntFieldUpdateOperationsInput | number
   }
 
   export type ResourceUpdateWithoutDepartmentInput = {
     name?: StringFieldUpdateOperationsInput | string
     File?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    publishStatus?: EnumPublishStatusFieldUpdateOperationsInput | $Enums.PublishStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishStatus?: EnumPublishStatusFieldUpdateOperationsInput | $Enums.PublishStatus
     tags?: ResourceUpdatetagsInput | string[]
     userActivities?: userActivityUpdateManyWithoutResourceNestedInput
     user?: UserUpdateOneRequiredWithoutResourceNestedInput
@@ -12306,10 +12306,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     File?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    publishStatus?: EnumPublishStatusFieldUpdateOperationsInput | $Enums.PublishStatus
-    userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishStatus?: EnumPublishStatusFieldUpdateOperationsInput | $Enums.PublishStatus
     tags?: ResourceUpdatetagsInput | string[]
+    userId?: IntFieldUpdateOperationsInput | number
     userActivities?: userActivityUncheckedUpdateManyWithoutResourceNestedInput
   }
 
@@ -12318,10 +12318,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     File?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
-    publishStatus?: EnumPublishStatusFieldUpdateOperationsInput | $Enums.PublishStatus
-    userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishStatus?: EnumPublishStatusFieldUpdateOperationsInput | $Enums.PublishStatus
     tags?: ResourceUpdatetagsInput | string[]
+    userId?: IntFieldUpdateOperationsInput | number
   }
 
   export type CourseUpdateWithoutDepartmentInput = {
@@ -12347,8 +12347,8 @@ export namespace Prisma {
   export type CourseCreateManySemesterInput = {
     id?: number
     name: string
-    departmentId: number
     createdAt?: Date | string
+    departmentId: number
   }
 
   export type CourseUpdateWithoutSemesterInput = {
@@ -12360,15 +12360,15 @@ export namespace Prisma {
   export type CourseUncheckedUpdateWithoutSemesterInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    departmentId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    departmentId?: IntFieldUpdateOperationsInput | number
   }
 
   export type CourseUncheckedUpdateManyWithoutSemesterInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    departmentId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    departmentId?: IntFieldUpdateOperationsInput | number
   }
 
   export type userActivityCreateManyResourceInput = {

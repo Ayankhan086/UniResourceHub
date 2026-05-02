@@ -5,14 +5,16 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../generated/client"
+  provider        = "prisma-client-js"
+  output          = "../generated/client"
+  previewFeatures = ["postgresqlExtensions"]
 }
 
 datasource db {
   provider     = "postgresql"
   url          = env("DATABASE_URL")
   relationMode = "prisma"
+  extensions   = [pgvector(map: "vector")]
 }
 
 enum PublishStatus {
@@ -38,13 +40,14 @@ model User {
 }
 
 model Department {
-  id        Int        @id @default(autoincrement())
-  name      String     @unique
+  id        Int                         @id @default(autoincrement())
+  name      String                      @unique
   semesters Semester[]
   resources Resource[]
   courses   Course[]
-  tags      String[]   @default([])
-  createdAt DateTime   @default(now())
+  tags      String[]                    @default([])
+  createdAt DateTime                    @default(now())
+  embedding Unsupported("vector(768)")?
 }
 
 model Semester {
@@ -67,18 +70,19 @@ model Course {
 }
 
 model Resource {
-  id             Int            @id @default(autoincrement())
+  id             Int                         @id @default(autoincrement())
   name           String
   File           String?
   image          String?
-  publishStatus  PublishStatus  @default(WAITING_FOR_APPROVAL)
+  publishStatus  PublishStatus               @default(WAITING_FOR_APPROVAL)
   userActivities userActivity[]
   departmentId   Int
-  department     Department     @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+  department     Department                  @relation(fields: [departmentId], references: [id], onDelete: Cascade)
   userId         Int
-  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt      DateTime       @default(now())
-  tags           String[]       @default([])
+  user           User                        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt      DateTime                    @default(now())
+  tags           String[]                    @default([])
+  embedding      Unsupported("vector(768)")?
 }
 
 model BlackListedToken {

@@ -1,18 +1,90 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client-js"
-  output   = "../generated/client"
+  provider        = "prisma-client-js"
+  output          = "../generated/client"
+  previewFeatures = ["postgresqlExtensions"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
+  extensions   = [vector]
+}
+
+model User {
+  id             Int            @id @default(autoincrement())
+  username       String
+  email          String         @unique
+  password       String
+  createdAt      DateTime       @default(now())
+  userActivities userActivity[]
+  Resource       Resource[]
+}
+
+model Department {
+  id        Int                    @id @default(autoincrement())
+  name      String                 @unique
+  createdAt DateTime               @default(now())
+  tags      String[]               @default([])
+  embedding Unsupported("vector")?
+  semesters Semester[]
+  resources Resource[]
+  courses   Course[]
+
+  @@index([embedding], map: "department_embedding_hnsw_idx")
+}
+
+model Semester {
+  id           Int        @id @default(autoincrement())
+  departmentId Int
+  createdAt    DateTime   @default(now())
+  Number       Int
+  department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+  courses      Course[]
+}
+
+model Course {
+  id           Int        @id @default(autoincrement())
+  name         String
+  semesterId   Int
+  createdAt    DateTime   @default(now())
+  departmentId Int
+  department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+  semester     Semester   @relation(fields: [semesterId], references: [id], onDelete: Cascade)
+}
+
+model Resource {
+  id             Int                    @id @default(autoincrement())
+  name           String
+  File           String?
+  image          String?
+  createdAt      DateTime               @default(now())
+  publishStatus  PublishStatus          @default(WAITING_FOR_APPROVAL)
+  departmentId   Int
+  tags           String[]               @default([])
+  userId         Int
+  embedding      Unsupported("vector")?
+  userActivities userActivity[]
+  department     Department             @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+  user           User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([embedding], map: "resource_embedding_hnsw_idx")
+}
+
+model BlackListedToken {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  createdAt DateTime @default(now())
+}
+
+model userActivity {
+  id         Int          @id @default(autoincrement())
+  type       ActivityType
+  userId     Int
+  resourceId Int
+  createdAt  DateTime     @default(now())
+  user       User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  resource   Resource     @relation(fields: [resourceId], references: [id], onDelete: Cascade)
 }
 
 enum PublishStatus {
@@ -25,76 +97,4 @@ enum ActivityType {
   DOWNLOAD
   UPLOAD
   SAVE
-}
-
-model User {
-  id             Int            @id @default(autoincrement())
-  username       String
-  email          String         @unique
-  password       String
-  userActivities userActivity[]
-  createdAt      DateTime       @default(now())
-  Resource       Resource[]
-}
-
-model Department {
-  id        Int        @id @default(autoincrement())
-  name      String     @unique
-  semesters Semester[]
-  resources Resource[]
-  courses   Course[]
-  tags      String[]   @default([])
-  createdAt DateTime   @default(now())
-}
-
-model Semester {
-  id           Int        @id @default(autoincrement())
-  Number       Int
-  departmentId Int
-  department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
-  courses      Course[]
-  createdAt    DateTime   @default(now())
-}
-
-model Course {
-  id           Int        @id @default(autoincrement())
-  name         String
-  semesterId   Int
-  departmentId Int
-  department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
-  semester     Semester   @relation(fields: [semesterId], references: [id], onDelete: Cascade)
-  createdAt    DateTime   @default(now())
-}
-
-model Resource {
-  id             Int            @id @default(autoincrement())
-  name           String
-  File           String?
-  image          String?
-  publishStatus  PublishStatus  @default(WAITING_FOR_APPROVAL)
-  userActivities userActivity[]
-  departmentId   Int
-  department     Department     @relation(fields: [departmentId], references: [id], onDelete: Cascade)
-  userId         Int
-  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt      DateTime       @default(now())
-  tags           String[]       @default([])
-}
-
-model BlackListedToken {
-  id        Int      @id @default(autoincrement())
-  token     String   @unique
-  createdAt DateTime @default(now())
-}
-
-model userActivity {
-  // This model tracks user activities related to resources
-  // such as downloads, uploads, and saves.
-  id         Int          @id @default(autoincrement())
-  type       ActivityType // Type of activity (DOWNLOAD, UPLOAD)
-  userId     Int
-  resourceId Int
-  user       User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  resource   Resource     @relation(fields: [resourceId], references: [id], onDelete: Cascade)
-  createdAt  DateTime     @default(now())
 }

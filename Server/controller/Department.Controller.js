@@ -1,6 +1,7 @@
 import { PrismaClient } from "../generated/client/client.js"
 import { ApiError } from "../utils/ApiError.js"
 import { ApiResponse } from "../utils/ApiResponse.js"
+import { generateEmbedding, formatEmbeddingForSql } from "../utils/embedding.js"
 
 const prisma = new PrismaClient()
 
@@ -29,6 +30,18 @@ export const createDepartment = async (req, res) => {
                 tags: tags
             }
         })
+
+        // Generate and store embedding for semantic search
+        try {
+            const embeddingText = `${name} ${tags.join(" ")}`;
+            const embedding = await generateEmbedding(embeddingText);
+            if (embedding) {
+                const formattedEmbedding = formatEmbeddingForSql(embedding);
+                await prisma.$executeRaw`UPDATE "Department" SET "embedding" = ${formattedEmbedding}::vector WHERE "id" = ${Dept.id}`;
+            }
+        } catch (embeddingError) {
+            console.error("Failed to generate embedding for department:", embeddingError);
+        }
 
         res.status(200).json(
             new ApiResponse(200, Dept, "Department Created Successfully.")
@@ -154,60 +167,60 @@ export const updateDepartment = async (req, res) => {
 }
 
 export const getDepartmentBySearch = async (req, res) => {
-
     try {
-
         const searchQuery = req.body.searchQuery;
+        let departments = [];
 
-        const departments = await prisma.department.findMany({
-            where: {
-                OR: [
+        // Try semantic search if query is substantial
+        if (searchQuery && searchQuery.length > 2) {
+            try {
+                const queryEmbedding = await generateEmbedding(searchQuery);
+                if (queryEmbedding) {
+                    const formattedEmbedding = formatEmbeddingForSql(queryEmbedding);
+                    
+                    // Perform vector similarity search
+                    departments = await prisma.$queryRaw`
+                        SELECT id, name, tags, "createdAt", "embedding"::text, (1 - ("embedding" <=> ${formattedEmbedding}::vector)) as similarity 
+                        FROM "Department"
+                        ORDER BY "embedding" <=> ${formattedEmbedding}::vector
+                        LIMIT 10
+                    `;
+                }
+            } catch (semanticError) {
+                console.error("Semantic search failed, falling back to keyword search:", semanticError);
+            }
+        }
 
-                    {
-                        name: {
-                            contains: searchQuery,
-                            mode: 'insensitive'
+        // Fallback to keyword search if semantic search returned no results or failed
+        if (departments.length === 0) {
+            departments = await prisma.department.findMany({
+                where: {
+                    OR: [
+                        { name: { contains: searchQuery, mode: 'insensitive' } },
+                        { tags: { has: searchQuery } }
+                    ]
+                },
+                include: {
+                    _count: {
+                        select: {
+                            courses: true,
+                            resources: true
                         }
-                    },
-                    {
-                        name: {
-                            startsWith: searchQuery,
-                            mode: 'insensitive'
-                        }
-                    },
-                    {
-                        name: {
-                            endsWith: searchQuery,
-                            mode: 'insensitive'
-                        }
-                    },
-                    {
-                        tags: {
-                            has: searchQuery
-                        }
-                    }
-
-                ]
-            },
-            include: {
-                _count: {
-                    select: {
-                        courses: true,
-                        resources: true
                     }
                 }
-            }
-        });
+            });
+        }
 
         if (!departments || departments.length === 0) {
-            new ApiResponse(401, null, "No Rsource Found")
+            throw new ApiError(404, "No Department Found");
         }
 
         return res.status(200).json(
-            new ApiResponse(200, departments, 'Resources fetched successfully')
+            new ApiResponse(200, departments, 'Departments fetched successfully')
         );
 
     } catch (error) {
+        console.error('Search error:', error);
         throw new ApiError(500, error.message);
     }
 }

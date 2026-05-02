@@ -131,23 +131,23 @@ exports.Prisma.UserScalarFieldEnum = {
 exports.Prisma.DepartmentScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  tags: 'tags',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  tags: 'tags'
 };
 
 exports.Prisma.SemesterScalarFieldEnum = {
   id: 'id',
-  Number: 'Number',
   departmentId: 'departmentId',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  Number: 'Number'
 };
 
 exports.Prisma.CourseScalarFieldEnum = {
   id: 'id',
   name: 'name',
   semesterId: 'semesterId',
-  departmentId: 'departmentId',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  departmentId: 'departmentId'
 };
 
 exports.Prisma.ResourceScalarFieldEnum = {
@@ -155,11 +155,11 @@ exports.Prisma.ResourceScalarFieldEnum = {
   name: 'name',
   File: 'File',
   image: 'image',
+  createdAt: 'createdAt',
   publishStatus: 'publishStatus',
   departmentId: 'departmentId',
-  userId: 'userId',
-  createdAt: 'createdAt',
-  tags: 'tags'
+  tags: 'tags',
+  userId: 'userId'
 };
 
 exports.Prisma.BlackListedTokenScalarFieldEnum = {
