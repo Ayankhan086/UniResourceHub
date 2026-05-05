@@ -40,6 +40,16 @@ jobs:
         aws ecr describe-repositories --repository-names ${{ env.ECR_REPOSITORY }} || \
         aws ecr create-repository --repository-name ${{ env.ECR_REPOSITORY }}
 
+    - name: Ensure ECS cluster exists
+      run: |
+        STATUS=$(aws ecs describe-clusters --clusters ${{ env.ECS_CLUSTER }} --query "clusters[0].status" --output text 2>/dev/null || echo "NONE")
+        if [ "$STATUS" != "ACTIVE" ]; then
+          echo "Cluster not found. Creating cluster: ${{ env.ECS_CLUSTER }}"
+          aws ecs create-cluster --cluster-name ${{ env.ECS_CLUSTER }}
+        else
+          echo "Cluster already exists and is ACTIVE."
+        fi
+
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v2
