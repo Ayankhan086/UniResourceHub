@@ -56,6 +56,23 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
+    - name: Ensure ECS task definition exists
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+        R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+        R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        R2_BUCKET_NAME: ${{ secrets.R2_BUCKET_NAME }}
+        R2_PUBLIC_URL: ${{ secrets.R2_PUBLIC_URL }}
+        ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      run: |
+        # Substitute secret placeholders in the template
+        envsubst < .github/task-definition.json > task-definition-filled.json
+        # Register the task definition if it doesn't already exist
+        aws ecs describe-task-definition --task-definition ${{ env.ECS_TASK_DEFINITION_FAMILY }} \
+        || aws ecs register-task-definition --cli-input-json file://task-definition-filled.json
+
     - name: Download current task definition
       run: |
         aws ecs describe-task-definition --task-definition ${{ env.ECS_TASK_DEFINITION_FAMILY }} \

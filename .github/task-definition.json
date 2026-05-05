@@ -1,0 +1,42 @@
+{
+  "family": "uniresourcehub-server-task",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "executionRoleArn": "arn:aws:iam::034096845965:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "server-container",
+      "image": "034096845965.dkr.ecr.us-east-1.amazonaws.com/uniresourcehub-server:latest",
+      "portMappings": [
+        {
+          "containerPort": 5000,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "environment": [
+        { "name": "PORT", "value": "5000" },
+        { "name": "NODE_ENV", "value": "production" },
+        { "name": "DATABASE_URL", "value": "${DATABASE_URL}" },
+        { "name": "R2_ACCOUNT_ID", "value": "${R2_ACCOUNT_ID}" },
+        { "name": "R2_ACCESS_KEY_ID", "value": "${R2_ACCESS_KEY_ID}" },
+        { "name": "R2_SECRET_ACCESS_KEY", "value": "${R2_SECRET_ACCESS_KEY}" },
+        { "name": "R2_BUCKET_NAME", "value": "${R2_BUCKET_NAME}" },
+        { "name": "R2_PUBLIC_URL", "value": "${R2_PUBLIC_URL}" },
+        { "name": "ACCESS_TOKEN_SECRET", "value": "${ACCESS_TOKEN_SECRET}" },
+        { "name": "ACCESS_TOKEN_EXPIRY", "value": "7d" },
+        { "name": "GEMINI_API_KEY", "value": "${GEMINI_API_KEY}" }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/uniresourcehub-server-task",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}
